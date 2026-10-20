@@ -88,7 +88,7 @@
     </a>
   </div>
 
-  <footer>&copy; <span id="yr"></span> Syntax Squad. All rights reserved.</footer>
+  <footer>&copy; <span id="yr"></span> Syntax Squad &middot; <a href="mailto:syntaxsquad@zohoemail.in" style="color:inherit">syntaxsquad@zohoemail.in</a></footer>
 </main>
 
 <script type="importmap">
@@ -98,26 +98,33 @@
 import * as THREE from "three";
 
 /* ================= CONFIG: edit these ================= */
-const FORM_ENDPOINT = "";  // paste a Formspree URL (https://formspree.io/f/xxxx) to collect emails
-const CONTACT_EMAIL = "hello@yourdomain.com"; // used as fallback if no form endpoint is set
+const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbx9x5HRpvG1J4jwD-UAK9onqiyJMHjMm5tADjjXpOxUeGEB7o7VTlgOn0YZBlYJrhZe/exec";  // paste your Google Apps Script Web App URL here (ends with /exec)
 /* ===================================================== */
 
 document.getElementById("yr").textContent = new Date().getFullYear();
 
-/* ---------- email form ---------- */
+/* ---------- email form (saves to Google Sheet, no mail app opens) ---------- */
 const note = document.getElementById("note");
-document.getElementById("notify").addEventListener("submit", async e => {
+const form = document.getElementById("notify");
+const btn = form.querySelector("button");
+form.addEventListener("submit", async e => {
   e.preventDefault();
-  const email = new FormData(e.target).get("email");
-  if (FORM_ENDPOINT) {
-    try {
-      const r = await fetch(FORM_ENDPOINT, { method: "POST", headers: { "Accept": "application/json", "Content-Type": "application/json" }, body: JSON.stringify({ email }) });
-      note.textContent = r.ok ? "You're in the squad! We'll keep you posted." : "Something went wrong. Please try again.";
-      if (r.ok) e.target.reset();
-    } catch { note.textContent = "Network error. Please try again."; }
-  } else {
-    location.href = `mailto:${CONTACT_EMAIL}?subject=Syntax%20Squad%20updates&body=Please%20keep%20me%20updated%20about%20Syntax%20Squad%20events.%20My%20email%3A%20${encodeURIComponent(email)}`;
+  const email = new FormData(form).get("email").trim();
+  if (!SCRIPT_URL) { note.textContent = "Signups open very soon. Follow us on Instagram or LinkedIn meanwhile!"; return; }
+  btn.disabled = true; btn.textContent = "Sending...";
+  try {
+    await fetch(SCRIPT_URL, {
+      method: "POST",
+      mode: "no-cors",
+      headers: { "Content-Type": "application/x-www-form-urlencoded" },
+      body: new URLSearchParams({ email })
+    });
+    note.textContent = "You're in the squad! Check your inbox for a confirmation.";
+    form.reset();
+  } catch {
+    note.textContent = "Something went wrong. Please try again.";
   }
+  btn.disabled = false; btn.textContent = "Notify me";
 });
 
 /* ---------- 3D scene ---------- */
