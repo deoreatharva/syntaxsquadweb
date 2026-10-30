@@ -98,7 +98,7 @@
 import * as THREE from "three";
 
 /* ================= CONFIG: edit these ================= */
-const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbx9x5HRpvG1J4jwD-UAK9onqiyJMHjMm5tADjjXpOxUeGEB7o7VTlgOn0YZBlYJrhZe/exec";  // paste your Google Apps Script Web App URL here (ends with /exec)
+const SCRIPT_URL = "https://script.google.com/macros/s/AKfycby8k0d3RWTNeLm1pFIhxQl8Gn45VIUw0SBM-PzKpHlXdTthSRgQKxXWCpoaK9y0K_AV/exec";  // paste your Google Apps Script Web App URL here (ends with /exec)
 /* ===================================================== */
 
 document.getElementById("yr").textContent = new Date().getFullYear();
@@ -107,24 +107,45 @@ document.getElementById("yr").textContent = new Date().getFullYear();
 const note = document.getElementById("note");
 const form = document.getElementById("notify");
 const btn = form.querySelector("button");
+
+// Create hidden iframe for form submission (prevents page redirect)
+const iframe = document.createElement("iframe");
+iframe.name = "hidden_iframe";
+iframe.style.display = "none";
+document.body.appendChild(iframe);
+
 form.addEventListener("submit", async e => {
   e.preventDefault();
-  const email = new FormData(form).get("email").trim();
+  const emailInput = form.querySelector('input[name="email"]');
+  const email = emailInput.value.trim();
+  if (!email) return;
   if (!SCRIPT_URL) { note.textContent = "Signups open very soon. Follow us on Instagram or LinkedIn meanwhile!"; return; }
   btn.disabled = true; btn.textContent = "Sending...";
   try {
-    await fetch(SCRIPT_URL, {
-      method: "POST",
-      mode: "no-cors",
-      headers: { "Content-Type": "application/x-www-form-urlencoded" },
-      body: new URLSearchParams({ email })
-    });
-    note.textContent = "You're in the squad! Check your inbox for a confirmation.";
-    form.reset();
+    // Use a temporary form to POST via hidden iframe
+    const tempForm = document.createElement("form");
+    tempForm.method = "POST";
+    tempForm.action = SCRIPT_URL;
+    tempForm.target = "hidden_iframe";
+    const input = document.createElement("input");
+    input.type = "hidden";
+    input.name = "email";
+    input.value = email;
+    tempForm.appendChild(input);
+    document.body.appendChild(tempForm);
+    tempForm.submit();
+    document.body.removeChild(tempForm);
+
+    // Show success after a short delay
+    setTimeout(() => {
+      note.textContent = "You're in the squad! We'll notify you when we launch 🚀";
+      form.reset();
+      btn.disabled = false; btn.textContent = "Notify me";
+    }, 1500);
   } catch {
     note.textContent = "Something went wrong. Please try again.";
+    btn.disabled = false; btn.textContent = "Notify me";
   }
-  btn.disabled = false; btn.textContent = "Notify me";
 });
 
 /* ---------- 3D scene ---------- */
