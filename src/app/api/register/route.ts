@@ -149,6 +149,30 @@ export async function POST(req: NextRequest) {
       await fs.writeFile(DATA_FILE, JSON.stringify(subscribers, null, 2), "utf-8");
     }
 
+    // 6. Forward to Google Sheets Web App (if configured)
+    const GOOGLE_SCRIPT_URL =
+      process.env.GOOGLE_SCRIPT_URL ||
+      "https://script.google.com/macros/s/AKfycby8k0d3RWTNeLm1pFIhxQl8Gn45VIUw0SBM-PzKpHlXdTthSRgQKxXWCpoaK9y0K_AV/exec";
+
+    if (GOOGLE_SCRIPT_URL) {
+      try {
+        const formData = new URLSearchParams();
+        formData.append("email", sanitizedEmail);
+        formData.append("registeredAt", new Date().toISOString());
+
+        // Fire-and-forget relay to Google Sheets
+        fetch(GOOGLE_SCRIPT_URL, {
+          method: "POST",
+          headers: { "Content-Type": "application/x-www-form-urlencoded" },
+          body: formData.toString(),
+        }).catch((e) => {
+          console.warn("Google Sheet sync warning:", e.message);
+        });
+      } catch (err) {
+        console.warn("Failed to initiate Google Sheet sync:", err);
+      }
+    }
+
     return NextResponse.json({
       success: true,
       message: "You're registered! Welcome to Syntax Squad.",
