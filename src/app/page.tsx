@@ -32,39 +32,39 @@ const activities = [
   {
     icon: <Trophy className="w-6 h-6" />,
     title: "Hackathons",
-    description: "We live for the 24-hour grind. From national-level hackathons to internal sprints, we build fast and ship faster.",
+    description: "24-hour dev sprints. We team up, brainstorm wild ideas, drink way too much coffee, and ship working prototypes before the timer runs out.",
   },
   {
     icon: <Zap className="w-6 h-6" />,
-    title: "Coding Competitions",
-    description: "Competitive programming, LeetCode contests, CodeForces rounds — we train together and compete at the top.",
+    title: "Competitive Programming",
+    description: "CodeForces, CodeChef & LeetCode rounds. We practice weekly contests, break down problem editorials together, and climb ratings as a crew.",
   },
   {
     icon: <Cpu className="w-6 h-6" />,
-    title: "Tech Fests",
-    description: "We participate and organise technical events, workshops and fests that bring the campus tech scene alive.",
+    title: "Tech Fests & Hack Days",
+    description: "Hands-on bug hunts, speed-coding face-offs, and interactive workshops where you actually write code instead of staring at slides.",
   },
   {
     icon: <BookOpen className="w-6 h-6" />,
-    title: "DSA Mastery",
-    description: "Structured DSA sessions from arrays to graphs. We make sure every member is placement-ready.",
+    title: "DSA for Interviews",
+    description: "Consistent problem-solving across trees, graphs, and dynamic programming so technical placement rounds feel like second nature.",
   },
   {
     icon: <Code2 className="w-6 h-6" />,
-    title: "Full Stack Dev",
-    description: "Learn React, Next.js, Node, databases and deployment — practical skills for real-world projects.",
+    title: "Full Stack Engineering",
+    description: "Real software, not to-do apps. Modern web frameworks, APIs, databases, and deploying live to production so you have actual work to show.",
   },
   {
     icon: <Users className="w-6 h-6" />,
-    title: "Community & Mentorship",
-    description: "Seniors mentor juniors. Doubt sessions, peer code reviews, and a community that grows together.",
+    title: "Peer Mentorship",
+    description: "Honest guidance from seniors who've already cracked hackathons and interviews. Resume reviews, project feedback, and zero ego.",
   },
 ];
 
 const achievements = [
   { event: "Smart India Hackathon", result: "Finalists", year: "2024", tag: "National" },
-  { event: "Internal Coding Contest", result: "1st Place", year: "2024", tag: "College" },
-  { event: "Tech Fest — Dev Sprint", result: "Winners", year: "2024", tag: "Inter-college" },
+  { event: "Speed Coding Challenge", result: "1st Place", year: "2024", tag: "Campus" },
+  { event: "Tech Fest — Dev Sprint", result: "Winners", year: "2024", tag: "Hackathon" },
   { event: "LeetCode Weekly Contest", result: "Top 5%", year: "2024", tag: "Global" },
   { event: "Open Source Hackathon", result: "2nd Place", year: "2023", tag: "Regional" },
   { event: "CP Olympiad", result: "Top 10", year: "2023", tag: "State" },
@@ -112,7 +112,7 @@ function HeroFront() {
           fontFamily: "'Space Grotesk', sans-serif",
         }}
       >
-        College Coding Club
+        Developer Crew & Competitive Coding
       </p>
 
       {/* Tagline below word */}
@@ -129,7 +129,7 @@ function HeroFront() {
           fontFamily: "'Inter', sans-serif",
         }}
       >
-        Hackathons · Competitive Programming · Full Stack · DSA
+        Late-night hackathons, competitive programming & shipping real software.
       </p>
 
       {/* Scroll hint */}
@@ -164,13 +164,13 @@ function AboutSection() {
             Who We Are
           </p>
           <h2 className="text-4xl md:text-5xl font-bold leading-tight tracking-tight text-[#f0fdf4] mb-6" style={{ fontFamily: "'Space Grotesk', sans-serif" }}>
-            We are Syntax Squad.
+            Just folks who genuinely love to code.
           </h2>
           <p className="text-[rgba(240,253,244,0.7)] leading-relaxed text-lg mb-6" style={{ fontFamily: "'Inter', sans-serif" }}>
-            A newly started college coding club built by students who believe that the best way to learn is to build, compete, and grow together.
+            We started Syntax Squad because watching tutorials alone gets boring fast. Coding is ten times more fun when you&apos;re in a room full of people debugging strange compiler errors at 3 AM, chasing edge cases, and building wild ideas under pressure.
           </p>
           <p className="text-[rgba(240,253,244,0.7)] leading-relaxed" style={{ fontFamily: "'Inter', sans-serif" }}>
-            From late-night hackathon grinds to structured DSA sessions and full-stack workshops — we&apos;re here to make sure every member walks out placement-ready and competition-hardened.
+            Whether it&apos;s forming teams for 36-hour national hackathons, grinding LeetCode patterns for upcoming placement rounds, or shipping production-ready web apps — we do it together as a team.
           </p>
         </div>
 
@@ -183,15 +183,15 @@ function AboutSection() {
           </div>
           <div className="space-y-2 text-[rgba(240,253,244,0.8)]">
             <p><span className="text-[#22c55e]">$</span> whoami</p>
-            <p className="text-[rgba(240,253,244,0.5)]">syntax-squad-member</p>
-            <p><span className="text-[#22c55e]">$</span> cat mission.txt</p>
-            <p className="text-[rgba(240,253,244,0.5)]">Build. Compete. Grow.</p>
-            <p><span className="text-[#22c55e]">$</span> ls skills/</p>
-            <p className="text-[rgba(240,253,244,0.5)]">dsa/ fullstack/ cp/ hackathons/</p>
+            <p className="text-[rgba(240,253,244,0.5)]">syntax-squad</p>
+            <p><span className="text-[#22c55e]">$</span> cat manifesto.txt</p>
+            <p className="text-[rgba(240,253,244,0.5)]">Write code. Break things. Ship fast.</p>
+            <p><span className="text-[#22c55e]">$</span> ls focus/</p>
+            <p className="text-[rgba(240,253,244,0.5)]">hackathons/ dsa/ cp/ fullstack/</p>
             <p><span className="text-[#22c55e]">$</span> git log --oneline -3</p>
             <p className="text-[rgba(240,253,244,0.5)]">a1b2c3 Won Dev Sprint 2024</p>
             <p className="text-[rgba(240,253,244,0.5)]">d4e5f6 SIH Finalists 2024</p>
-            <p className="text-[rgba(240,253,244,0.5)]">g7h8i9 Club founded 🚀</p>
+            <p className="text-[rgba(240,253,244,0.5)]">g7h8i9 Squad founded 🚀</p>
             <p className="flex items-center gap-1"><span className="text-[#22c55e]">$</span> <span className="animate-pulse">█</span></p>
           </div>
         </div>
@@ -211,7 +211,7 @@ function WhatWeDoSection() {
             What We Do
           </p>
           <h2 className="text-4xl md:text-5xl font-bold leading-tight tracking-tight text-[#f0fdf4]" style={{ fontFamily: "'Space Grotesk', sans-serif" }}>
-            Everything tech. Under one roof.
+            No empty lectures. Just practical skills and real contests.
           </h2>
         </div>
 
@@ -249,7 +249,7 @@ function AchievementsSection() {
             Our Track Record
           </p>
           <h2 className="text-4xl md:text-5xl font-bold leading-tight tracking-tight text-[#f0fdf4]" style={{ fontFamily: "'Space Grotesk', sans-serif" }}>
-            We don&apos;t just participate. We win.
+            Podiums, finalist spots, and late-night victories.
           </h2>
         </div>
 
@@ -297,7 +297,7 @@ function JoinSection() {
 
     const trimmed = email.trim();
     if (!trimmed || !trimmed.includes("@") || trimmed.length > 100) {
-      setErrorMessage("Please enter a valid email address (up to 100 characters).");
+      setErrorMessage("Please enter a valid email address.");
       return;
     }
 
@@ -329,7 +329,7 @@ function JoinSection() {
       setHpWebsite("");
     } catch {
       setStatus("error");
-      setErrorMessage("Network error. Please verify your connection or email syntaxsquad@zohoemail.in directly.");
+      setErrorMessage("Network glitch. Please try again or ping us at syntaxsquad@zohoemail.in");
     }
   };
 
@@ -342,20 +342,20 @@ function JoinSection() {
 
       <div className="max-w-2xl mx-auto text-center relative">
         <p className="text-[#22c55e] text-xs font-semibold tracking-widest uppercase mb-4" style={{ fontFamily: "'Space Grotesk', sans-serif" }}>
-          Join the Squad
+          Get in the loop
         </p>
         <h2 className="text-4xl md:text-5xl font-bold leading-tight tracking-tight text-[#f0fdf4] mb-4" style={{ fontFamily: "'Space Grotesk', sans-serif" }}>
-          Ready to level up?
+          Want to build and compete with us?
         </h2>
         <p className="text-[rgba(240,253,244,0.7)] text-lg leading-relaxed mb-10" style={{ fontFamily: "'Inter', sans-serif" }}>
-          Drop your email and we&apos;ll reach out with everything you need to know about joining Syntax Squad — events, sessions, and more.
+          No spam, ever. Drop your email and we&apos;ll ping you with upcoming hackathon team formations, contest prep sessions, and tech meetups.
         </p>
 
         {status === "done" ? (
           <div className="flex items-center justify-center gap-3 bg-[rgba(34,197,94,0.12)] border border-[rgba(34,197,94,0.3)] rounded-xl px-6 py-4 text-[#22c55e]">
             <Check className="w-5 h-5" />
             <span className="font-semibold" style={{ fontFamily: "'Space Grotesk', sans-serif" }}>
-              You&apos;re on the list! We&apos;ll be in touch soon.
+              You&apos;re in! We&apos;ll be in touch soon.
             </span>
           </div>
         ) : (
@@ -384,7 +384,7 @@ function JoinSection() {
                   setEmail(e.target.value);
                   if (errorMessage) setErrorMessage("");
                 }}
-                placeholder="Enter your student email..."
+                placeholder="Enter your email address..."
                 required
                 className="flex-1 px-4 py-3.5 rounded-xl bg-[rgba(240,253,244,0.07)] border border-[rgba(240,253,244,0.12)] text-[#f0fdf4] placeholder:text-[rgba(240,253,244,0.35)] focus:outline-none focus:border-[#22c55e] focus:ring-1 focus:ring-[#22c55e] transition-colors text-sm"
                 style={{ fontFamily: "'Inter', sans-serif" }}
@@ -402,7 +402,7 @@ function JoinSection() {
                   </span>
                 ) : (
                   <>
-                    <span>Get Updates</span>
+                    <span>Join the Squad</span>
                     <ArrowRight className="w-4 h-4" />
                   </>
                 )}
@@ -418,7 +418,7 @@ function JoinSection() {
         )}
 
         <p className="text-[rgba(240,253,244,0.4)] text-xs mt-4" style={{ fontFamily: "'Inter', sans-serif" }}>
-          Or reach us directly at{" "}
+          Or drop a line directly to{" "}
           <a href="mailto:syntaxsquad@zohoemail.in" className="text-[rgba(240,253,244,0.7)] hover:text-[#22c55e] transition-colors underline underline-offset-2">
             syntaxsquad@zohoemail.in
           </a>
@@ -494,7 +494,7 @@ function Footer() {
 
       <div className="max-w-5xl mx-auto mt-8 pt-6 border-t border-[rgba(34,197,94,0.06)] text-center">
         <p className="text-[rgba(240,253,244,0.25)] text-xs" style={{ fontFamily: "'Inter', sans-serif" }}>
-          © 2026 Syntax Squad. Built with ❤️ and lots of caffeine.
+          © 2026 Syntax Squad. Built by builders who refuse to write boring code.
         </p>
       </div>
     </footer>
@@ -511,7 +511,7 @@ export default function Home() {
         scrollLength={1.8}
         interactive={true}
         fontWeight={900}
-        enterLabel="Explore the squad"
+        enterLabel="Step inside"
         style={{
           "--gp-paper": "#050f08",
           "--gp-ink": "#22c55e",
@@ -533,13 +533,13 @@ export default function Home() {
         {/* This content shows after scrolling through the portal */}
         <div style={{ fontFamily: "'Space Grotesk', sans-serif" }}>
           <p style={{ color: "#22c55e", fontSize: 12, fontWeight: 600, letterSpacing: "0.1em", textTransform: "uppercase", marginBottom: 16, fontFamily: "'Inter', sans-serif" }}>
-            Welcome Inside
+            Terminal Online
           </p>
           <h2 style={{ color: "#f0fdf4", fontSize: "clamp(2rem, 5vw, 3.5rem)", fontWeight: 700, lineHeight: 1.1, letterSpacing: "-0.03em", maxWidth: "14ch", margin: "0 0 20px" }}>
-            Where code meets community.
+            We build, break, and win together.
           </h2>
           <p style={{ color: "rgba(240,253,244,0.7)", fontSize: 17, lineHeight: 1.7, maxWidth: "42ch", margin: 0, fontFamily: "'Inter', sans-serif" }}>
-            Syntax Squad is your home for hackathons, competitive programming, full-stack development, and everything CS — built by students, for students.
+            Syntax Squad is a close-knit crew of programmers pushing each other through 24-hour hackathons, daily DSA sprints, and building real-world software.
           </p>
         </div>
       </GlyphPortal>

@@ -2,13 +2,13 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Syntax Squad — Where Code Meets Community",
+  title: "Syntax Squad — Builders, Hackathons & Competitive Coding",
   description:
-    "Syntax Squad is a college coding club promoting hackathon culture, competitive programming, tech fests, DSA, and full-stack development. Join us and level up your tech career.",
-  keywords: ["hackathon", "coding club", "syntax squad", "competitive programming", "DSA", "full stack", "tech fest"],
+    "Syntax Squad is a student-led developer crew focused on hackathons, competitive programming, tech fests, DSA, and shipping real full-stack software.",
+  keywords: ["hackathon", "coding community", "syntax squad", "competitive programming", "DSA", "full stack", "tech fest", "student developers"],
   openGraph: {
     title: "Syntax Squad",
-    description: "Where code meets community. Join the squad.",
+    description: "Build fast, solve hard problems, and ship together. Join the squad.",
     url: "https://syntaxsquad.in",
     siteName: "Syntax Squad",
     type: "website",
