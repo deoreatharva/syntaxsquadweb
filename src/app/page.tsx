@@ -311,40 +311,33 @@ function JoinSection() {
         return;
       }
 
-      const GOOGLE_SCRIPT_URL =
-        "https://script.google.com/macros/s/AKfycby8k0d3RWTNeLm1pFIhxQl8Gn45VIUw0SBM-PzKpHlXdTthSRgQKxXWCpoaK9y0K_AV/exec";
+      const res = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+        body: JSON.stringify({
+          access_key: "7dc9784e-5c7e-4f8a-9ab1-32a1c3a246f9",
+          email: trimmed,
+          subject: `New Syntax Squad Signup: ${trimmed}`,
+          from_name: "Syntax Squad Web",
+        }),
+      });
 
-      // Submit to Google Sheet via hidden iframe (bypasses CORS & handles Apps Script redirects)
-      let iframe = document.getElementById("gscript_hidden_iframe") as HTMLIFrameElement;
-      if (!iframe) {
-        iframe = document.createElement("iframe");
-        iframe.id = "gscript_hidden_iframe";
-        iframe.name = "gscript_hidden_iframe";
-        iframe.style.display = "none";
-        document.body.appendChild(iframe);
+      const data = await res.json();
+
+      if (data.success) {
+        setStatus("done");
+        setEmail("");
+        setHpWebsite("");
+      } else {
+        setStatus("error");
+        setErrorMessage(data.message || "Unable to submit. Please try again.");
       }
-
-      const tempForm = document.createElement("form");
-      tempForm.method = "POST";
-      tempForm.action = GOOGLE_SCRIPT_URL;
-      tempForm.target = "gscript_hidden_iframe";
-
-      const emailInput = document.createElement("input");
-      emailInput.type = "hidden";
-      emailInput.name = "email";
-      emailInput.value = trimmed;
-      tempForm.appendChild(emailInput);
-
-      document.body.appendChild(tempForm);
-      tempForm.submit();
-      document.body.removeChild(tempForm);
-
-      setStatus("done");
-      setEmail("");
-      setHpWebsite("");
     } catch {
       setStatus("error");
-      setErrorMessage("Network glitch. Please try again or ping us at syntaxsquad@zohoemail.in");
+      setErrorMessage("Network glitch. Please try again or ping us directly at syntaxsquad@zohoemail.in");
     }
   };
 
