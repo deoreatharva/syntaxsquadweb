@@ -304,29 +304,32 @@ function JoinSection() {
     setStatus("submitting");
 
     try {
-      const res = await fetch("/api/register", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          email: trimmed,
-          hp_website: hpWebsite,
-        }),
-      });
-
-      const data = await res.json();
-
-      if (!res.ok) {
-        setStatus("error");
-        setErrorMessage(data.error || "Unable to register. Please try again later.");
+      // If honeypot is filled, silent success (drops bot)
+      if (hpWebsite && hpWebsite.trim().length > 0) {
+        setStatus("done");
+        setEmail("");
         return;
       }
+
+      const GOOGLE_SCRIPT_URL =
+        "https://script.google.com/macros/s/AKfycby8k0d3RWTNeLm1pFIhxQl8Gn45VIUw0SBM-PzKpHlXdTthSRgQKxXWCpoaK9y0K_AV/exec";
+
+      const formData = new FormData();
+      formData.append("email", trimmed);
+
+      // Submit directly to Google Sheet Web App
+      await fetch(GOOGLE_SCRIPT_URL, {
+        method: "POST",
+        mode: "no-cors",
+        body: formData,
+      });
 
       setStatus("done");
       setEmail("");
       setHpWebsite("");
     } catch {
       setStatus("error");
-      setErrorMessage("Network error. Please verify your connection and try again.");
+      setErrorMessage("Network error. Please verify your connection or email syntaxsquad@zohoemail.in directly.");
     }
   };
 
