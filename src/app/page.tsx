@@ -314,15 +314,30 @@ function JoinSection() {
       const GOOGLE_SCRIPT_URL =
         "https://script.google.com/macros/s/AKfycby8k0d3RWTNeLm1pFIhxQl8Gn45VIUw0SBM-PzKpHlXdTthSRgQKxXWCpoaK9y0K_AV/exec";
 
-      const formData = new FormData();
-      formData.append("email", trimmed);
+      // Submit to Google Sheet via hidden iframe (bypasses CORS & handles Apps Script redirects)
+      let iframe = document.getElementById("gscript_hidden_iframe") as HTMLIFrameElement;
+      if (!iframe) {
+        iframe = document.createElement("iframe");
+        iframe.id = "gscript_hidden_iframe";
+        iframe.name = "gscript_hidden_iframe";
+        iframe.style.display = "none";
+        document.body.appendChild(iframe);
+      }
 
-      // Submit directly to Google Sheet Web App
-      await fetch(GOOGLE_SCRIPT_URL, {
-        method: "POST",
-        mode: "no-cors",
-        body: formData,
-      });
+      const tempForm = document.createElement("form");
+      tempForm.method = "POST";
+      tempForm.action = GOOGLE_SCRIPT_URL;
+      tempForm.target = "gscript_hidden_iframe";
+
+      const emailInput = document.createElement("input");
+      emailInput.type = "hidden";
+      emailInput.name = "email";
+      emailInput.value = trimmed;
+      tempForm.appendChild(emailInput);
+
+      document.body.appendChild(tempForm);
+      tempForm.submit();
+      document.body.removeChild(tempForm);
 
       setStatus("done");
       setEmail("");
