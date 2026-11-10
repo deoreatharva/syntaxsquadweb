@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useRef } from "react";
-import { Mail, ExternalLink, Trophy, Code2, Cpu, Users, Zap, BookOpen, ChevronDown, Terminal, ArrowRight, Check } from "lucide-react";
+import { Mail, ExternalLink, Trophy, Code2, Cpu, Users, Zap, BookOpen, ChevronDown, Terminal, ArrowRight, Check, Sparkles } from "lucide-react";
 import GlyphPortal from "@/components/ui/glyph-portal";
 import ClubShowcase from "@/components/ClubShowcase";
 
@@ -62,13 +62,59 @@ const activities = [
   },
 ];
 
-const achievements = [
-  { event: "Smart India Hackathon", result: "Finalists", year: "2024", tag: "National" },
-  { event: "Speed Coding Challenge", result: "1st Place", year: "2024", tag: "Campus" },
-  { event: "Tech Fest — Dev Sprint", result: "Winners", year: "2024", tag: "Hackathon" },
-  { event: "LeetCode Weekly Contest", result: "Top 5%", year: "2024", tag: "Global" },
-  { event: "Open Source Hackathon", result: "2nd Place", year: "2023", tag: "Regional" },
-  { event: "CP Olympiad", result: "Top 10", year: "2023", tag: "State" },
+interface AchievementItem {
+  event: string;
+  result: string;
+  detail: string;
+  year: string;
+  tag: string;
+  isUpcoming?: boolean;
+}
+
+const achievements: AchievementItem[] = [
+  {
+    event: "NMIMS Ulectron '26",
+    result: "1st Runner Up",
+    detail: "Awarded ₹15,000 cash prize money for breakthrough prototype",
+    year: "2026",
+    tag: "₹15k Prize",
+  },
+  {
+    event: "IIT Bombay",
+    result: "Gold Medal",
+    detail: "Secured 1st place gold medal finish at prestigious tech event",
+    year: "2025",
+    tag: "Gold Medal",
+  },
+  {
+    event: "NMAM Institute of Technology",
+    result: "Hackathon Winners",
+    detail: "Championed the intense 36-hour national level Hackfest",
+    year: "2025",
+    tag: "36hr Hackfest",
+  },
+  {
+    event: "IIT Delhi",
+    result: "Invited Delegation",
+    detail: "Officially invited to showcase and represent at IIT Delhi",
+    year: "2025",
+    tag: "National Stage",
+  },
+  {
+    event: "Kurukshetra — MIT Alandi",
+    result: "Top 20 Teams",
+    detail: "Finished in the top 20 contenders among 500+ national teams",
+    year: "2025",
+    tag: "Top 20 of 500",
+  },
+  {
+    event: "Next Milestone",
+    result: "Revealing Soon...",
+    detail: "Another major hackathon victory currently in the works",
+    year: "2026",
+    tag: "Stay Tuned",
+    isUpcoming: true,
+  },
 ];
 
 /* ─── HERO FRONT OVERLAY ────────────────────────────────── */
@@ -258,21 +304,40 @@ function AchievementsSection() {
           {achievements.map((a, i) => (
             <div
               key={i}
-              className="rounded-xl border border-[rgba(34,197,94,0.12)] bg-[#0a1a0e] p-5 hover:border-[rgba(34,197,94,0.3)] transition-colors"
+              className={`rounded-xl border p-5 transition-all duration-200 flex flex-col justify-between ${
+                a.isUpcoming
+                  ? "border-dashed border-[rgba(34,197,94,0.3)] bg-[rgba(10,26,14,0.5)] hover:border-[rgba(34,197,94,0.5)]"
+                  : "border-[rgba(34,197,94,0.12)] bg-[#0a1a0e] hover:border-[rgba(34,197,94,0.3)] hover:shadow-[0_8px_24px_rgba(34,197,94,0.08)]"
+              }`}
             >
-              <div className="flex items-start justify-between mb-3">
-                <Trophy className="w-5 h-5 text-[#22c55e] flex-shrink-0 mt-0.5" />
-                <span className="text-xs bg-[rgba(34,197,94,0.12)] text-[#22c55e] px-2 py-0.5 rounded-full font-medium" style={{ fontFamily: "'Inter', sans-serif" }}>
-                  {a.tag}
-                </span>
+              <div>
+                <div className="flex items-start justify-between mb-3">
+                  {a.isUpcoming ? (
+                    <Sparkles className="w-5 h-5 text-[#22c55e] flex-shrink-0 mt-0.5 animate-pulse" />
+                  ) : (
+                    <Trophy className="w-5 h-5 text-[#22c55e] flex-shrink-0 mt-0.5" />
+                  )}
+                  <span
+                    className="text-xs bg-[rgba(34,197,94,0.12)] text-[#22c55e] px-2.5 py-0.5 rounded-full font-medium"
+                    style={{ fontFamily: "'Inter', sans-serif" }}
+                  >
+                    {a.tag}
+                  </span>
+                </div>
+                <h3 className="text-[#f0fdf4] font-semibold text-base mb-1" style={{ fontFamily: "'Space Grotesk', sans-serif" }}>
+                  {a.event}
+                </h3>
+                <p className="text-[#22c55e] font-bold text-lg leading-snug" style={{ fontFamily: "'Space Grotesk', sans-serif" }}>
+                  {a.result}
+                </p>
+                <p className="text-[rgba(240,253,244,0.65)] text-xs mt-2 leading-relaxed" style={{ fontFamily: "'Inter', sans-serif" }}>
+                  {a.detail}
+                </p>
               </div>
-              <h3 className="text-[#f0fdf4] font-semibold text-base mb-1" style={{ fontFamily: "'Space Grotesk', sans-serif" }}>
-                {a.event}
-              </h3>
-              <p className="text-[#22c55e] font-bold text-lg" style={{ fontFamily: "'Space Grotesk', sans-serif" }}>
-                {a.result}
-              </p>
-              <p className="text-[rgba(240,253,244,0.4)] text-xs mt-1" style={{ fontFamily: "'Inter', sans-serif" }}>
+              <p
+                className="text-[rgba(240,253,244,0.4)] text-[11px] mt-4 pt-3 border-t border-[rgba(34,197,94,0.08)]"
+                style={{ fontFamily: "'Inter', sans-serif" }}
+              >
                 {a.year}
               </p>
             </div>
