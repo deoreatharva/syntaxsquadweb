@@ -148,7 +148,11 @@ function HeroFront() {
       <p
         style={{
           position: "absolute",
-          inset: "auto 16px calc(100% - var(--gp-word-top,38%) + 16px)",
+          bottom: "calc(100% - var(--gp-word-top,38%) + 16px)",
+          left: "50%",
+          transform: "translateX(-50%)",
+          width: "calc(100% - 32px)",
+          maxWidth: "38ch",
           margin: 0,
           textAlign: "center",
           fontSize: "clamp(11px, 2.5vw, 13px)",
@@ -166,13 +170,16 @@ function HeroFront() {
       <p
         style={{
           position: "absolute",
-          inset: "calc(var(--gp-word-bottom,50%) + 16px) 20px auto",
-          margin: "0 auto",
-          maxWidth: "40ch",
+          top: "calc(var(--gp-word-bottom,50%) + 18px)",
+          left: "50%",
+          transform: "translateX(-50%)",
+          width: "calc(100% - 32px)",
+          maxWidth: "42ch",
+          margin: 0,
           textAlign: "center",
           fontSize: "clamp(13px, 3.2vw, 15px)",
           fontWeight: 400,
-          lineHeight: 1.5,
+          lineHeight: 1.55,
           color: "rgba(240,253,244,0.8)",
           fontFamily: "'Inter', sans-serif",
         }}
@@ -563,7 +570,7 @@ export default function Home() {
     <main>
       <GlyphPortal
         word="SYNTAX"
-        scrollLength={1.7}
+        scrollLength={1.4}
         interactive={true}
         fontWeight={900}
         enterLabel="Step inside"

@@ -387,11 +387,7 @@ export default function GlyphPortal({
         ${q} [data-gp-letter]{box-sizing:border-box;position:absolute;border:0;padding:0;margin:0;background:transparent;cursor:pointer;pointer-events:auto;touch-action:pan-y;}
         ${q} [data-gp-letter]:disabled{pointer-events:none;}
         ${q} [data-gp-letter]:focus-visible{outline:2px solid #22c55e;outline-offset:5px;}
-        ${q} [data-gp-touch-picker]{display:none;position:absolute;top:calc(var(--gp-word-bottom,50%) + 42px);left:50%;transform:translateX(-50%);font:12px/1.4 "Space Grotesk",Arial,sans-serif;align-items:center;gap:12px;visibility:hidden;}
-        ${q}[data-gp-choosing=true] [data-gp-touch-picker]{visibility:visible;}
-        ${q} [data-gp-select]{min-height:44px;min-width:90px;border:1px solid rgba(34,197,94,.3);border-radius:6px;background:#0b3b2a;color:#f0fdf4;padding:0 10px;font:inherit;}
-        ${q} [data-gp-select]:focus-visible{outline:2px solid #22c55e;outline-offset:4px;}
-        @media(any-pointer:coarse){${q} [data-gp-touch-picker]{display:flex;}}
+        ${q} [data-gp-touch-picker]{display:none!important;visibility:hidden!important;pointer-events:none!important;}
         ${q} [data-gp-caption]{position:absolute;inset:auto 8% 9%;display:flex;align-items:center;justify-content:space-between;gap:1rem;font:13px/1.4 "Space Grotesk",Arial,sans-serif;opacity:var(--gp-caption,1);pointer-events:var(--gp-caption-hit,auto);}
         ${q} [data-gp-front]{position:absolute;inset:0;opacity:var(--gp-caption,1);pointer-events:none;}
         ${q} [data-gp-front] a,${q} [data-gp-front] button{pointer-events:var(--gp-caption-hit,auto);}
@@ -480,9 +476,9 @@ export default function GlyphPortal({
             />
           ))}
         </div>
-        <label data-gp-touch-picker>
+        <label data-gp-touch-picker style={{ display: "none" }} aria-hidden="true">
           <span style={{ position: "absolute", width: 1, height: 1, overflow: "hidden", clipPath: "inset(50%)" }}>Entry letter</span>
-          <select data-gp-select defaultValue="">
+          <select data-gp-select defaultValue="" tabIndex={-1}>
             <option value="" disabled>Choose a letter</option>
             {characters.map(({ char, index }, i) => (
               <option key={index} value={index}>{i + 1} · {char}</option>
