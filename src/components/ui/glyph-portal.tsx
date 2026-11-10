@@ -263,7 +263,7 @@ export default function GlyphPortal({
       section.dataset.gpChoosing = String(choosing);
       field.style.clipPath = t >= 1 ? "none" : `url(#${clipId})`;
       section.style.setProperty("--gp-caption", String(1 - smooth(0.01, 0.16, p)));
-      section.style.setProperty("--gp-reveal", String(isStatic ? 1 : smooth(0.78, 0.9, p)));
+      section.style.setProperty("--gp-reveal", String(isStatic ? 1 : smooth(0.6, 0.88, p)));
       section.style.setProperty("--gp-field-scale", String(1 + .16 * smooth(0, .82, p)));
       section.style.setProperty("--gp-caption-hit", p < 0.08 ? "auto" : "none");
       section.dataset.gpEntered = String(p >= 0.9);
@@ -381,7 +381,7 @@ export default function GlyphPortal({
     <section ref={sectionRef} id={uid} className={className} aria-label={text}
       style={{ "--gp-length": length, "--gp-characters": Array.from(text).length, ...style } as CSSProperties}>
       <style>{`
-        ${q}{--gp-paper:#050f08;--gp-ink:#22c55e;--gp-field:#0b3b2a;--gp-foreground:#f0fdf4;position:relative;isolation:isolate;background:var(--gp-paper);color:var(--gp-ink);font-family:"Space Grotesk",Arial,sans-serif;}
+        ${q}{--gp-paper:#050f08;--gp-ink:#22c55e;--gp-field:#0b3b2a;--gp-foreground:#f0fdf4;position:relative;isolation:isolate;background:var(--gp-field);color:var(--gp-ink);font-family:"Space Grotesk",Arial,sans-serif;}
         ${q}>[data-gp-viewport]{position:absolute;inset:0 auto auto 0;height:100vh;height:100svh;width:0;pointer-events:none;visibility:hidden;}
         ${q} [data-gp-pin]{position:relative;height:var(--gp-height,100svh);overflow:clip;isolation:isolate;container-type:size;}
         ${q} [data-gp-field]{position:absolute;inset:0;background:var(--gp-field);opacity:1;pointer-events:none;}
@@ -405,7 +405,7 @@ export default function GlyphPortal({
         ${q} [data-gp-content]{box-sizing:border-box;position:relative;min-height:var(--gp-height,100svh);padding:clamp(32px,7%,100px);display:grid;align-content:center;color:var(--gp-foreground);background:var(--gp-field);overflow-wrap:anywhere;}
         ${q}[data-gp-motion=on] [data-gp-pin]{position:sticky;top:0;}
         ${q}[data-gp-motion=off] [data-gp-hint]{display:none;}
-        ${q}[data-gp-motion=on] [data-gp-content]{margin-top:calc((var(--gp-length) - 1) * var(--gp-height));background:#0b3b2a;opacity:var(--gp-reveal,0);pointer-events:none;}
+        ${q}[data-gp-motion=on] [data-gp-content]{margin-top:calc((var(--gp-length) - 1) * var(--gp-height));background:#0b3b2a;opacity:var(--gp-reveal,1);pointer-events:none;}
         ${q}[data-gp-motion=on][data-gp-entered=true] [data-gp-content]{pointer-events:auto;}
         ${q}[data-gp-motion=on]:has([data-gp-content]:focus-within) [data-gp-field]{clip-path:none!important;}
         ${q}[data-gp-motion=on] [data-gp-content]:focus-within{opacity:1;pointer-events:auto;}
