@@ -404,11 +404,17 @@ export default function GlyphPortal({
         ${q} [data-gp-content]{box-sizing:border-box;position:relative;min-height:var(--gp-height,100svh);padding:clamp(32px,7%,100px);display:grid;align-content:center;color:var(--gp-foreground);background:var(--gp-field);overflow-wrap:anywhere;}
         ${q}[data-gp-motion=on] [data-gp-pin]{position:sticky;top:0;}
         ${q}[data-gp-motion=off] [data-gp-hint]{display:none;}
-        ${q}[data-gp-motion=on] [data-gp-content]{margin-top:calc((var(--gp-length) - 1) * var(--gp-height));background:transparent;opacity:var(--gp-reveal,0);pointer-events:none;}
+        ${q}[data-gp-motion=on] [data-gp-content]{margin-top:calc((var(--gp-length) - 1) * var(--gp-height));background:#0b3b2a;opacity:var(--gp-reveal,0);pointer-events:none;}
         ${q}[data-gp-motion=on][data-gp-entered=true] [data-gp-content]{pointer-events:auto;}
         ${q}[data-gp-motion=on]:has([data-gp-content]:focus-within) [data-gp-field]{clip-path:none!important;}
         ${q}[data-gp-motion=on] [data-gp-content]:focus-within{opacity:1;pointer-events:auto;}
         ${q}:has([data-gp-content]:focus-within) [data-gp-caption],${q}:has([data-gp-content]:focus-within) [data-gp-marks]{opacity:0;}
+        @media(max-width:768px){
+          ${q} [data-gp-content]{min-height:auto!important;padding:48px 18px!important;background:#0b3b2a!important;}
+          ${q} [data-gp-caption]{inset:auto 16px 20px;flex-direction:column;gap:8px;text-align:center;}
+          ${q} [data-gp-hint]{font-size:11px;max-width:100%;}
+          ${q} [data-gp-enter]{min-height:38px;padding:0 14px;font-size:12px;}
+        }
         @media(prefers-reduced-motion:reduce){${q} [data-gp-pin]{position:relative!important;} ${q} [data-gp-content]{margin-top:0!important;opacity:1!important;background:var(--gp-field)!important;min-height:0;padding-block:64px;} ${q} [data-gp-caption]{opacity:1!important;}}
         @media(prefers-reduced-motion:reduce){${q} [data-gp-hint]{display:none;}}
       `}</style>

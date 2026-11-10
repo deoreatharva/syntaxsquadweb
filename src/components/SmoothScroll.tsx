@@ -13,14 +13,16 @@ export default function SmoothScroll({ children }: { children: React.ReactNode }
 
     // Initialize Lenis with buttery smooth inertia parameters
     const lenis = new Lenis({
-      duration: 1.3,
+      duration: 1.2,
       easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), // Luxurious exponential decay
       orientation: "vertical",
       gestureOrientation: "vertical",
       smoothWheel: true,
-      wheelMultiplier: 0.92, // Soft, non-jarring wheel response
-      touchMultiplier: 1.5,
+      wheelMultiplier: 0.95, // Soft, non-jarring wheel response
+      touchMultiplier: 1.0,  // Natural 1:1 touch ratio, no violent jumping on mobile
+      syncTouch: false,      // Do not fight mobile OS native hardware momentum touch physics
       infinite: false,
+      autoResize: true,
     });
 
     (window as any).__lenis = lenis;

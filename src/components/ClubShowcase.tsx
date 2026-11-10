@@ -75,6 +75,7 @@ export default function ClubShowcase() {
   const [activeIndex, setActiveIndex] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
   const touchStartX = useRef<number | null>(null);
+  const touchStartY = useRef<number | null>(null);
 
   // Auto-advance every 3.8s with smooth buttery feel, paused on user hover
   useEffect(() => {
@@ -95,29 +96,35 @@ export default function ClubShowcase() {
 
   const handleTouchStart = (e: React.TouchEvent) => {
     touchStartX.current = e.touches[0].clientX;
+    touchStartY.current = e.touches[0].clientY;
   };
 
   const handleTouchEnd = (e: React.TouchEvent) => {
-    if (touchStartX.current === null) return;
-    const diff = touchStartX.current - e.changedTouches[0].clientX;
-    if (Math.abs(diff) > 40) {
-      if (diff > 0) nextSlide();
+    if (touchStartX.current === null || touchStartY.current === null) return;
+    const diffX = touchStartX.current - e.changedTouches[0].clientX;
+    const diffY = touchStartY.current - e.changedTouches[0].clientY;
+
+    // Only switch slide if horizontal intent is clearly higher than vertical scroll
+    if (Math.abs(diffX) > 40 && Math.abs(diffX) > Math.abs(diffY) * 1.4) {
+      if (diffX > 0) nextSlide();
       else prevSlide();
     }
     touchStartX.current = null;
+    touchStartY.current = null;
   };
 
   const current = moments[activeIndex];
 
   return (
     <div
-      className="w-full flex flex-col gap-3.5 select-none"
+      className="w-full flex flex-col gap-2.5 sm:gap-3.5 select-none"
+      style={{ touchAction: "pan-y" }}
       onMouseEnter={() => setIsPaused(true)}
       onMouseLeave={() => setIsPaused(false)}
     >
       {/* ── Main Showcase Frame ── */}
       <div
-        className="relative w-full aspect-[16/10] sm:aspect-[16/9] md:aspect-[16/10] rounded-2xl overflow-hidden border border-[rgba(255,255,255,0.18)] bg-[#051a11] shadow-[0_20px_50px_rgba(0,0,0,0.45)] group"
+        className="relative w-full aspect-[16/10] sm:aspect-[16/9] md:aspect-[16/10] rounded-xl sm:rounded-2xl overflow-hidden border border-[rgba(255,255,255,0.18)] bg-[#051a11] shadow-[0_12px_36px_rgba(0,0,0,0.45)] group"
         onTouchStart={handleTouchStart}
         onTouchEnd={handleTouchEnd}
       >
@@ -130,7 +137,7 @@ export default function ClubShowcase() {
               className={`absolute inset-0 transition-all duration-700 ease-out transform ${
                 isActive
                   ? "opacity-100 scale-100 pointer-events-auto"
-                  : "opacity-0 scale-[1.04] pointer-events-none"
+                  : "opacity-0 scale-[1.03] pointer-events-none"
               }`}
             >
               {/* Background image */}
@@ -149,60 +156,60 @@ export default function ClubShowcase() {
         })}
 
         {/* Floating Top Tag */}
-        <div className="absolute top-3.5 left-3.5 right-3.5 flex items-center justify-between z-10">
-          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#05150e]/85 backdrop-blur-md border border-[rgba(34,197,94,0.35)] shadow-lg">
-            <span className="w-2 h-2 rounded-full bg-[#22c55e] animate-pulse" />
-            <span className="text-[11px] font-semibold tracking-wider uppercase text-[#f0fdf4] font-[family-name:var(--font-space-grotesk)]">
+        <div className="absolute top-2.5 sm:top-3.5 left-2.5 sm:left-3.5 right-2.5 sm:right-3.5 flex items-center justify-between z-10">
+          <div className="inline-flex items-center gap-1.5 px-2.5 sm:px-3 py-0.5 sm:py-1 rounded-full bg-[#05150e]/85 backdrop-blur-md border border-[rgba(34,197,94,0.35)] shadow-lg">
+            <span className="w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full bg-[#22c55e] animate-pulse" />
+            <span className="text-[10px] sm:text-[11px] font-semibold tracking-wider uppercase text-[#f0fdf4] font-[family-name:var(--font-space-grotesk)]">
               {current.tag}
             </span>
           </div>
 
           {/* Slide counter */}
-          <div className="px-2.5 py-1 rounded-full bg-[#05150e]/75 backdrop-blur-md border border-white/10 text-[11px] font-mono text-[#f0fdf4]/75">
+          <div className="px-2 sm:px-2.5 py-0.5 sm:py-1 rounded-full bg-[#05150e]/75 backdrop-blur-md border border-white/10 text-[10px] sm:text-[11px] font-mono text-[#f0fdf4]/75">
             {activeIndex + 1} / {moments.length}
           </div>
         </div>
 
         {/* Floating Bottom Info */}
-        <div className="absolute bottom-0 inset-x-0 p-4 sm:p-5 z-10 flex items-end justify-between gap-4">
+        <div className="absolute bottom-0 inset-x-0 p-3 sm:p-5 z-10 flex items-end justify-between gap-3">
           <div className="max-w-[75%]">
-            <h3 className="text-lg sm:text-xl font-bold text-[#f0fdf4] tracking-tight leading-tight font-[family-name:var(--font-space-grotesk)] drop-shadow-md">
+            <h3 className="text-sm sm:text-xl font-bold text-[#f0fdf4] tracking-tight leading-tight font-[family-name:var(--font-space-grotesk)] drop-shadow-md">
               {current.title}
             </h3>
-            <p className="text-xs sm:text-sm text-[#f0fdf4]/80 font-[family-name:var(--font-inter)] line-clamp-1 mt-0.5 drop-shadow">
+            <p className="text-[11px] sm:text-sm text-[#f0fdf4]/80 font-[family-name:var(--font-inter)] line-clamp-1 mt-0.5 drop-shadow">
               {current.subtitle}
             </p>
           </div>
 
           {/* Arrows */}
-          <div className="flex items-center gap-1.5 z-20">
+          <div className="flex items-center gap-1 sm:gap-1.5 z-20">
             <button
               onClick={prevSlide}
               aria-label="Previous photo"
-              className="w-8 h-8 rounded-full bg-[#05150e]/80 hover:bg-[#22c55e] text-[#f0fdf4] hover:text-[#05150e] border border-white/15 hover:border-[#22c55e] flex items-center justify-center backdrop-blur-md transition-all duration-200 active:scale-95 cursor-pointer shadow-md"
+              className="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-[#05150e]/80 hover:bg-[#22c55e] text-[#f0fdf4] hover:text-[#05150e] border border-white/15 hover:border-[#22c55e] flex items-center justify-center backdrop-blur-md transition-all duration-200 active:scale-95 cursor-pointer shadow-md"
             >
-              <ChevronLeft className="w-4 h-4" />
+              <ChevronLeft className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
             </button>
             <button
               onClick={nextSlide}
               aria-label="Next photo"
-              className="w-8 h-8 rounded-full bg-[#05150e]/80 hover:bg-[#22c55e] text-[#f0fdf4] hover:text-[#05150e] border border-white/15 hover:border-[#22c55e] flex items-center justify-center backdrop-blur-md transition-all duration-200 active:scale-95 cursor-pointer shadow-md"
+              className="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-[#05150e]/80 hover:bg-[#22c55e] text-[#f0fdf4] hover:text-[#05150e] border border-white/15 hover:border-[#22c55e] flex items-center justify-center backdrop-blur-md transition-all duration-200 active:scale-95 cursor-pointer shadow-md"
             >
-              <ChevronRight className="w-4 h-4" />
+              <ChevronRight className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
             </button>
           </div>
         </div>
       </div>
 
       {/* ── Filmstrip Thumbnail Collage Strip ── */}
-      <div className="flex items-center gap-2 overflow-x-auto pb-1.5 pt-0.5 no-scrollbar">
+      <div className="flex items-center gap-1.5 sm:gap-2 overflow-x-auto pb-1 pt-0.5 no-scrollbar scroll-smooth">
         {moments.map((m, index) => {
           const isActive = index === activeIndex;
           return (
             <button
               key={m.id}
               onClick={() => setActiveIndex(index)}
-              className={`relative flex-shrink-0 w-14 sm:w-16 h-10 sm:h-11 rounded-lg overflow-hidden border transition-all duration-300 cursor-pointer ${
+              className={`relative flex-shrink-0 w-12 sm:w-16 h-8 sm:h-11 rounded-md sm:rounded-lg overflow-hidden border transition-all duration-300 cursor-pointer ${
                 isActive
                   ? "border-[#22c55e] ring-2 ring-[#22c55e]/40 scale-105 opacity-100 shadow-[0_0_12px_rgba(34,197,94,0.4)]"
                   : "border-white/15 opacity-55 hover:opacity-90 hover:border-white/40"
@@ -224,3 +231,4 @@ export default function ClubShowcase() {
     </div>
   );
 }
+

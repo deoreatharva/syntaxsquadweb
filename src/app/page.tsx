@@ -126,11 +126,11 @@ function HeroFront() {
       <div
         style={{
           position: "absolute",
-          inset: "clamp(20px,4svh,40px) clamp(20px,5vw,56px) auto",
+          inset: "clamp(16px,3svh,36px) clamp(16px,4vw,56px) auto",
           display: "flex",
           alignItems: "center",
           justifyContent: "space-between",
-          gap: 16,
+          gap: 12,
         }}
       >
         <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
@@ -139,7 +139,7 @@ function HeroFront() {
             syntax<span style={{ color: "#22c55e" }}>squad</span>
           </span>
         </div>
-        <span style={{ fontSize: 11, color: "rgba(240,253,244,0.5)", letterSpacing: "0.08em", textTransform: "uppercase" }}>
+        <span className="hidden sm:inline-block" style={{ fontSize: 11, color: "rgba(240,253,244,0.5)", letterSpacing: "0.08em", textTransform: "uppercase" }}>
           syntaxsquad.in
         </span>
       </div>
@@ -148,14 +148,14 @@ function HeroFront() {
       <p
         style={{
           position: "absolute",
-          inset: "auto 24px calc(100% - var(--gp-word-top,35%) + 28px)",
+          inset: "auto 16px calc(100% - var(--gp-word-top,38%) + 16px)",
           margin: 0,
           textAlign: "center",
-          fontSize: 13,
-          fontWeight: 500,
+          fontSize: "clamp(11px, 2.5vw, 13px)",
+          fontWeight: 600,
           letterSpacing: "0.15em",
           textTransform: "uppercase",
-          color: "rgba(240,253,244,0.65)",
+          color: "rgba(240,253,244,0.7)",
           fontFamily: "'Space Grotesk', sans-serif",
         }}
       >
@@ -166,36 +166,19 @@ function HeroFront() {
       <p
         style={{
           position: "absolute",
-          inset: "calc(var(--gp-word-bottom,50%) + 28px) 24px auto",
-          margin: 0,
+          inset: "calc(var(--gp-word-bottom,50%) + 16px) 20px auto",
+          margin: "0 auto",
+          maxWidth: "40ch",
           textAlign: "center",
-          fontSize: 15,
+          fontSize: "clamp(13px, 3.2vw, 15px)",
           fontWeight: 400,
-          lineHeight: 1.6,
-          color: "rgba(240,253,244,0.75)",
+          lineHeight: 1.5,
+          color: "rgba(240,253,244,0.8)",
           fontFamily: "'Inter', sans-serif",
         }}
       >
         Late-night hackathons, competitive programming & shipping real software.
       </p>
-
-      {/* Scroll hint */}
-      <div
-        style={{
-          position: "absolute",
-          inset: "auto 24px 6%",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          gap: 8,
-          color: "rgba(240,253,244,0.4)",
-          fontSize: 11,
-          letterSpacing: "0.06em",
-        }}
-      >
-        <ChevronDown className="w-4 h-4 animate-bounce" style={{ color: "rgba(240,253,244,0.4)" }} />
-        <span>Scroll to explore</span>
-      </div>
     </>
   );
 }
@@ -204,25 +187,25 @@ function HeroFront() {
 
 function AboutSection() {
   return (
-    <section className="bg-[#050f08] py-24 px-6 md:px-12 lg:px-24">
-      <div className="max-w-5xl mx-auto grid md:grid-cols-2 gap-16 items-center">
+    <section className="bg-[#050f08] py-16 sm:py-24 px-5 sm:px-8 md:px-12 lg:px-24">
+      <div className="max-w-5xl mx-auto grid md:grid-cols-2 gap-10 md:gap-16 items-center">
         <div>
-          <p className="text-[#22c55e] text-xs font-semibold tracking-widest uppercase mb-4" style={{ fontFamily: "'Space Grotesk', sans-serif" }}>
+          <p className="text-[#22c55e] text-xs font-semibold tracking-widest uppercase mb-3 sm:mb-4" style={{ fontFamily: "'Space Grotesk', sans-serif" }}>
             Who We Are
           </p>
-          <h2 className="text-4xl md:text-5xl font-bold leading-tight tracking-tight text-[#f0fdf4] mb-6" style={{ fontFamily: "'Space Grotesk', sans-serif" }}>
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold leading-tight tracking-tight text-[#f0fdf4] mb-4 sm:mb-6" style={{ fontFamily: "'Space Grotesk', sans-serif" }}>
             Just folks who genuinely love to code.
           </h2>
-          <p className="text-[rgba(240,253,244,0.7)] leading-relaxed text-lg mb-6" style={{ fontFamily: "'Inter', sans-serif" }}>
+          <p className="text-[rgba(240,253,244,0.75)] leading-relaxed text-sm sm:text-base md:text-lg mb-4 sm:mb-6" style={{ fontFamily: "'Inter', sans-serif" }}>
             We started Syntax Squad because watching tutorials alone gets boring fast. Coding is ten times more fun when you&apos;re in a room full of people debugging strange compiler errors at 3 AM, chasing edge cases, and building wild ideas under pressure.
           </p>
-          <p className="text-[rgba(240,253,244,0.7)] leading-relaxed" style={{ fontFamily: "'Inter', sans-serif" }}>
+          <p className="text-[rgba(240,253,244,0.7)] leading-relaxed text-sm sm:text-base" style={{ fontFamily: "'Inter', sans-serif" }}>
             Whether it&apos;s forming teams for 36-hour national hackathons, grinding LeetCode patterns for upcoming placement rounds, or shipping production-ready web apps — we do it together as a team.
           </p>
         </div>
 
         {/* Terminal card */}
-        <div className="rounded-xl border border-[rgba(34,197,94,0.15)] bg-[#0a1a0e] p-6 font-mono text-sm shadow-2xl">
+        <div className="rounded-xl border border-[rgba(34,197,94,0.15)] bg-[#0a1a0e] p-4 sm:p-6 font-mono text-xs sm:text-sm shadow-2xl overflow-x-auto">
           <div className="flex gap-2 mb-4">
             <span className="w-3 h-3 rounded-full bg-[#ff5f57]" />
             <span className="w-3 h-3 rounded-full bg-[#febc2e]" />
@@ -251,30 +234,30 @@ function AboutSection() {
 
 function WhatWeDoSection() {
   return (
-    <section className="bg-[#0a1a0e] py-24 px-6 md:px-12 lg:px-24">
+    <section className="bg-[#0a1a0e] py-16 sm:py-24 px-5 sm:px-8 md:px-12 lg:px-24">
       <div className="max-w-6xl mx-auto">
-        <div className="text-center mb-16">
-          <p className="text-[#22c55e] text-xs font-semibold tracking-widest uppercase mb-4" style={{ fontFamily: "'Space Grotesk', sans-serif" }}>
+        <div className="text-center mb-10 sm:mb-16">
+          <p className="text-[#22c55e] text-xs font-semibold tracking-widest uppercase mb-3 sm:mb-4" style={{ fontFamily: "'Space Grotesk', sans-serif" }}>
             What We Do
           </p>
-          <h2 className="text-4xl md:text-5xl font-bold leading-tight tracking-tight text-[#f0fdf4]" style={{ fontFamily: "'Space Grotesk', sans-serif" }}>
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold leading-tight tracking-tight text-[#f0fdf4]" style={{ fontFamily: "'Space Grotesk', sans-serif" }}>
             No empty lectures. Just practical skills and real contests.
           </h2>
         </div>
 
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
           {activities.map((item, i) => (
             <div
               key={i}
-              className="group rounded-xl border border-[rgba(34,197,94,0.12)] bg-[#050f08] p-6 hover:border-[rgba(34,197,94,0.35)] hover:bg-[#0b1f10] transition-all duration-300"
+              className="group rounded-xl border border-[rgba(34,197,94,0.12)] bg-[#050f08] p-5 sm:p-6 hover:border-[rgba(34,197,94,0.35)] hover:bg-[#0b1f10] transition-all duration-300"
             >
-              <div className="w-10 h-10 rounded-lg bg-[rgba(34,197,94,0.1)] flex items-center justify-center text-[#22c55e] mb-4 group-hover:bg-[rgba(34,197,94,0.18)] transition-colors">
+              <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-lg bg-[rgba(34,197,94,0.1)] flex items-center justify-center text-[#22c55e] mb-3.5 sm:mb-4 group-hover:bg-[rgba(34,197,94,0.18)] transition-colors">
                 {item.icon}
               </div>
-              <h3 className="text-[#f0fdf4] font-semibold text-lg mb-2" style={{ fontFamily: "'Space Grotesk', sans-serif" }}>
+              <h3 className="text-[#f0fdf4] font-semibold text-base sm:text-lg mb-1.5 sm:mb-2" style={{ fontFamily: "'Space Grotesk', sans-serif" }}>
                 {item.title}
               </h3>
-              <p className="text-[rgba(240,253,244,0.6)] text-sm leading-relaxed" style={{ fontFamily: "'Inter', sans-serif" }}>
+              <p className="text-[rgba(240,253,244,0.6)] text-xs sm:text-sm leading-relaxed" style={{ fontFamily: "'Inter', sans-serif" }}>
                 {item.description}
               </p>
             </div>
@@ -289,22 +272,22 @@ function WhatWeDoSection() {
 
 function AchievementsSection() {
   return (
-    <section className="bg-[#050f08] py-24 px-6 md:px-12 lg:px-24">
+    <section className="bg-[#050f08] py-16 sm:py-24 px-5 sm:px-8 md:px-12 lg:px-24">
       <div className="max-w-5xl mx-auto">
-        <div className="text-center mb-16">
-          <p className="text-[#22c55e] text-xs font-semibold tracking-widest uppercase mb-4" style={{ fontFamily: "'Space Grotesk', sans-serif" }}>
+        <div className="text-center mb-10 sm:mb-16">
+          <p className="text-[#22c55e] text-xs font-semibold tracking-widest uppercase mb-3 sm:mb-4" style={{ fontFamily: "'Space Grotesk', sans-serif" }}>
             Our Track Record
           </p>
-          <h2 className="text-4xl md:text-5xl font-bold leading-tight tracking-tight text-[#f0fdf4]" style={{ fontFamily: "'Space Grotesk', sans-serif" }}>
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold leading-tight tracking-tight text-[#f0fdf4]" style={{ fontFamily: "'Space Grotesk', sans-serif" }}>
             Podiums, finalist spots, and late-night victories.
           </h2>
         </div>
 
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3.5 sm:gap-4">
           {achievements.map((a, i) => (
             <div
               key={i}
-              className={`rounded-xl border p-5 transition-all duration-200 flex flex-col justify-between ${
+              className={`rounded-xl border p-4 sm:p-5 transition-all duration-200 flex flex-col justify-between ${
                 a.isUpcoming
                   ? "border-dashed border-[rgba(34,197,94,0.3)] bg-[rgba(10,26,14,0.5)] hover:border-[rgba(34,197,94,0.5)]"
                   : "border-[rgba(34,197,94,0.12)] bg-[#0a1a0e] hover:border-[rgba(34,197,94,0.3)] hover:shadow-[0_8px_24px_rgba(34,197,94,0.08)]"
@@ -318,24 +301,24 @@ function AchievementsSection() {
                     <Trophy className="w-5 h-5 text-[#22c55e] flex-shrink-0 mt-0.5" />
                   )}
                   <span
-                    className="text-xs bg-[rgba(34,197,94,0.12)] text-[#22c55e] px-2.5 py-0.5 rounded-full font-medium"
+                    className="text-[11px] sm:text-xs bg-[rgba(34,197,94,0.12)] text-[#22c55e] px-2.5 py-0.5 rounded-full font-medium"
                     style={{ fontFamily: "'Inter', sans-serif" }}
                   >
                     {a.tag}
                   </span>
                 </div>
-                <h3 className="text-[#f0fdf4] font-semibold text-base mb-1" style={{ fontFamily: "'Space Grotesk', sans-serif" }}>
+                <h3 className="text-[#f0fdf4] font-semibold text-sm sm:text-base mb-1" style={{ fontFamily: "'Space Grotesk', sans-serif" }}>
                   {a.event}
                 </h3>
-                <p className="text-[#22c55e] font-bold text-lg leading-snug" style={{ fontFamily: "'Space Grotesk', sans-serif" }}>
+                <p className="text-[#22c55e] font-bold text-base sm:text-lg leading-snug" style={{ fontFamily: "'Space Grotesk', sans-serif" }}>
                   {a.result}
                 </p>
-                <p className="text-[rgba(240,253,244,0.65)] text-xs mt-2 leading-relaxed" style={{ fontFamily: "'Inter', sans-serif" }}>
+                <p className="text-[rgba(240,253,244,0.65)] text-xs mt-1.5 sm:mt-2 leading-relaxed" style={{ fontFamily: "'Inter', sans-serif" }}>
                   {a.detail}
                 </p>
               </div>
               <p
-                className="text-[rgba(240,253,244,0.4)] text-[11px] mt-4 pt-3 border-t border-[rgba(34,197,94,0.08)]"
+                className="text-[rgba(240,253,244,0.4)] text-[11px] mt-3 sm:mt-4 pt-2.5 sm:pt-3 border-t border-[rgba(34,197,94,0.08)]"
                 style={{ fontFamily: "'Inter', sans-serif" }}
               >
                 {a.year}
@@ -370,7 +353,6 @@ function JoinSection() {
     setStatus("submitting");
 
     try {
-      // If honeypot is filled, silent success (drops bot)
       if (hpWebsite && hpWebsite.trim().length > 0) {
         setStatus("done");
         setEmail("");
@@ -408,33 +390,32 @@ function JoinSection() {
   };
 
   return (
-    <section className="bg-[#0b3b2a] py-24 px-6 md:px-12 lg:px-24 relative overflow-hidden">
+    <section className="bg-[#0b3b2a] py-16 sm:py-24 px-5 sm:px-8 md:px-12 lg:px-24 relative overflow-hidden">
       {/* Background glow */}
       <div className="absolute inset-0 pointer-events-none">
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[400px] bg-[rgba(34,197,94,0.07)] rounded-full blur-3xl" />
       </div>
 
       <div className="max-w-2xl mx-auto text-center relative">
-        <p className="text-[#22c55e] text-xs font-semibold tracking-widest uppercase mb-4" style={{ fontFamily: "'Space Grotesk', sans-serif" }}>
+        <p className="text-[#22c55e] text-xs font-semibold tracking-widest uppercase mb-3 sm:mb-4" style={{ fontFamily: "'Space Grotesk', sans-serif" }}>
           Get in the loop
         </p>
-        <h2 className="text-4xl md:text-5xl font-bold leading-tight tracking-tight text-[#f0fdf4] mb-4" style={{ fontFamily: "'Space Grotesk', sans-serif" }}>
+        <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold leading-tight tracking-tight text-[#f0fdf4] mb-3 sm:mb-4" style={{ fontFamily: "'Space Grotesk', sans-serif" }}>
           Want to build and compete with us?
         </h2>
-        <p className="text-[rgba(240,253,244,0.7)] text-lg leading-relaxed mb-10" style={{ fontFamily: "'Inter', sans-serif" }}>
+        <p className="text-[rgba(240,253,244,0.7)] text-sm sm:text-base md:text-lg leading-relaxed mb-8 sm:mb-10" style={{ fontFamily: "'Inter', sans-serif" }}>
           No spam, ever. Drop your email and we&apos;ll ping you with upcoming hackathon team formations, contest prep sessions, and tech meetups.
         </p>
 
         {status === "done" ? (
-          <div className="flex items-center justify-center gap-3 bg-[rgba(34,197,94,0.12)] border border-[rgba(34,197,94,0.3)] rounded-xl px-6 py-4 text-[#22c55e]">
-            <Check className="w-5 h-5" />
-            <span className="font-semibold" style={{ fontFamily: "'Space Grotesk', sans-serif" }}>
+          <div className="flex items-center justify-center gap-3 bg-[rgba(34,197,94,0.12)] border border-[rgba(34,197,94,0.3)] rounded-xl px-5 sm:px-6 py-4 text-[#22c55e]">
+            <Check className="w-5 h-5 flex-shrink-0" />
+            <span className="font-semibold text-sm sm:text-base" style={{ fontFamily: "'Space Grotesk', sans-serif" }}>
               You&apos;re in! We&apos;ll be in touch soon.
             </span>
           </div>
         ) : (
           <form onSubmit={handleSubmit} className="flex flex-col gap-3">
-            {/* Honeypot field: invisible to real users, catches automated spam bots */}
             <div style={{ display: "none" }} aria-hidden="true">
               <label htmlFor="hp_website_field">Leave this field blank</label>
               <input
@@ -447,7 +428,7 @@ function JoinSection() {
               />
             </div>
 
-            <div className="flex flex-col sm:flex-row gap-3">
+            <div className="flex flex-col sm:flex-row gap-2.5 sm:gap-3">
               <input
                 ref={inputRef}
                 type="email"
@@ -460,13 +441,13 @@ function JoinSection() {
                 }}
                 placeholder="Enter your email address..."
                 required
-                className="flex-1 px-4 py-3.5 rounded-xl bg-[rgba(240,253,244,0.07)] border border-[rgba(240,253,244,0.12)] text-[#f0fdf4] placeholder:text-[rgba(240,253,244,0.35)] focus:outline-none focus:border-[#22c55e] focus:ring-1 focus:ring-[#22c55e] transition-colors text-sm"
+                className="flex-1 px-4 py-3 sm:py-3.5 rounded-xl bg-[rgba(240,253,244,0.07)] border border-[rgba(240,253,244,0.12)] text-[#f0fdf4] placeholder:text-[rgba(240,253,244,0.35)] focus:outline-none focus:border-[#22c55e] focus:ring-1 focus:ring-[#22c55e] transition-colors text-sm"
                 style={{ fontFamily: "'Inter', sans-serif" }}
               />
               <button
                 type="submit"
                 disabled={status === "submitting"}
-                className="flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl bg-[#22c55e] text-[#050f08] font-bold text-sm hover:bg-[#16a34a] active:scale-[0.98] transition-all disabled:opacity-60 disabled:cursor-not-allowed whitespace-nowrap cursor-pointer"
+                className="flex items-center justify-center gap-2 px-6 py-3 sm:py-3.5 rounded-xl bg-[#22c55e] text-[#050f08] font-bold text-sm hover:bg-[#16a34a] active:scale-[0.98] transition-all disabled:opacity-60 disabled:cursor-not-allowed whitespace-nowrap cursor-pointer"
                 style={{ fontFamily: "'Space Grotesk', sans-serif" }}
               >
                 {status === "submitting" ? (
@@ -506,10 +487,10 @@ function JoinSection() {
 
 function Footer() {
   return (
-    <footer className="bg-[#050f08] border-t border-[rgba(34,197,94,0.1)] py-12 px-6 md:px-12">
-      <div className="max-w-5xl mx-auto flex flex-col md:flex-row items-center justify-between gap-8">
+    <footer className="bg-[#050f08] border-t border-[rgba(34,197,94,0.1)] py-10 sm:py-12 px-5 sm:px-8 md:px-12">
+      <div className="max-w-5xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6 sm:gap-8 text-center md:text-left">
         {/* Brand */}
-        <div className="flex flex-col items-center md:items-start gap-2">
+        <div className="flex flex-col items-center md:items-start gap-1.5">
           <div className="flex items-center gap-2">
             <Terminal className="w-5 h-5 text-[#22c55e]" />
             <span className="font-bold text-xl tracking-tight text-[#f0fdf4]" style={{ fontFamily: "'Space Grotesk', sans-serif" }}>
@@ -520,7 +501,7 @@ function Footer() {
             href="https://syntaxsquad.in"
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center gap-1 text-[rgba(240,253,244,0.4)] hover:text-[#22c55e] transition-colors text-sm"
+            className="flex items-center gap-1 text-[rgba(240,253,244,0.4)] hover:text-[#22c55e] transition-colors text-xs sm:text-sm"
             style={{ fontFamily: "'Inter', sans-serif" }}
           >
             syntaxsquad.in <ExternalLink className="w-3 h-3" />
@@ -531,25 +512,25 @@ function Footer() {
         <div className="flex flex-col items-center gap-2">
           <a
             href="mailto:syntaxsquad@zohoemail.in"
-            className="flex items-center gap-2 text-[rgba(240,253,244,0.6)] hover:text-[#22c55e] transition-colors text-sm"
+            className="flex items-center gap-2 text-[rgba(240,253,244,0.6)] hover:text-[#22c55e] transition-colors text-xs sm:text-sm"
             style={{ fontFamily: "'Inter', sans-serif" }}
           >
-            <Mail className="w-4 h-4" />
+            <Mail className="w-4 h-4 flex-shrink-0" />
             syntaxsquad@zohoemail.in
           </a>
         </div>
 
         {/* Socials */}
-        <div className="flex items-center gap-4">
+        <div className="flex items-center gap-3 sm:gap-4">
           <a
             href="https://www.instagram.com/syntax_._squad/"
             target="_blank"
             rel="noopener noreferrer"
             aria-label="Instagram"
-            className="flex items-center gap-2 px-4 py-2 rounded-lg border border-[rgba(34,197,94,0.15)] text-[rgba(240,253,244,0.6)] hover:border-[rgba(34,197,94,0.4)] hover:text-[#22c55e] hover:bg-[rgba(34,197,94,0.05)] transition-all text-sm"
+            className="flex items-center gap-1.5 sm:gap-2 px-3.5 sm:px-4 py-2 rounded-lg border border-[rgba(34,197,94,0.15)] text-[rgba(240,253,244,0.6)] hover:border-[rgba(34,197,94,0.4)] hover:text-[#22c55e] hover:bg-[rgba(34,197,94,0.05)] transition-all text-xs sm:text-sm"
             style={{ fontFamily: "'Inter', sans-serif" }}
           >
-            <InstagramIcon className="w-4 h-4" />
+            <InstagramIcon className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
             <span>Instagram</span>
           </a>
           <a
@@ -557,17 +538,17 @@ function Footer() {
             target="_blank"
             rel="noopener noreferrer"
             aria-label="LinkedIn"
-            className="flex items-center gap-2 px-4 py-2 rounded-lg border border-[rgba(34,197,94,0.15)] text-[rgba(240,253,244,0.6)] hover:border-[rgba(34,197,94,0.4)] hover:text-[#22c55e] hover:bg-[rgba(34,197,94,0.05)] transition-all text-sm"
+            className="flex items-center gap-1.5 sm:gap-2 px-3.5 sm:px-4 py-2 rounded-lg border border-[rgba(34,197,94,0.15)] text-[rgba(240,253,244,0.6)] hover:border-[rgba(34,197,94,0.4)] hover:text-[#22c55e] hover:bg-[rgba(34,197,94,0.05)] transition-all text-xs sm:text-sm"
             style={{ fontFamily: "'Inter', sans-serif" }}
           >
-            <LinkedinIcon className="w-4 h-4" />
+            <LinkedinIcon className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
             <span>LinkedIn</span>
           </a>
         </div>
       </div>
 
-      <div className="max-w-5xl mx-auto mt-8 pt-6 border-t border-[rgba(34,197,94,0.06)] text-center">
-        <p className="text-[rgba(240,253,244,0.25)] text-xs" style={{ fontFamily: "'Inter', sans-serif" }}>
+      <div className="max-w-5xl mx-auto mt-6 sm:mt-8 pt-5 sm:pt-6 border-t border-[rgba(34,197,94,0.06)] text-center">
+        <p className="text-[rgba(240,253,244,0.3)] text-xs" style={{ fontFamily: "'Inter', sans-serif" }}>
           © 2026 Syntax Squad. Built by builders who refuse to write boring code.
         </p>
       </div>
@@ -582,7 +563,7 @@ export default function Home() {
     <main>
       <GlyphPortal
         word="SYNTAX"
-        scrollLength={1.8}
+        scrollLength={1.7}
         interactive={true}
         fontWeight={900}
         enterLabel="Step inside"
@@ -605,32 +586,32 @@ export default function Home() {
         front={<HeroFront />}
       >
         {/* Responsive Two-Column Layout: Left Story + Right Achievements Showcase */}
-        <div className="w-full max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+        <div className="w-full max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-8 lg:gap-12 items-center">
           {/* Left Column (Club Story & Highlights) */}
           <div className="lg:col-span-5 flex flex-col justify-center" style={{ fontFamily: "'Space Grotesk', sans-serif" }}>
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#05150e]/70 border border-[rgba(34,197,94,0.35)] w-fit mb-4 backdrop-blur-md shadow-sm">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#05150e]/75 border border-[rgba(34,197,94,0.35)] w-fit mb-3 sm:mb-4 backdrop-blur-md shadow-sm">
               <span className="w-2 h-2 rounded-full bg-[#22c55e] animate-ping" />
               <p className="text-[#22c55e] text-xs font-semibold tracking-widest uppercase m-0 font-[family-name:var(--font-inter)]">
                 Terminal Online
               </p>
             </div>
 
-            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold leading-[1.1] tracking-tight text-[#f0fdf4] mb-4">
+            <h2 className="text-2xl sm:text-4xl md:text-5xl font-bold leading-[1.15] tracking-tight text-[#f0fdf4] mb-3 sm:mb-4">
               We build, break, and win together.
             </h2>
 
-            <p className="text-[rgba(240,253,244,0.85)] text-base sm:text-lg leading-relaxed mb-6 font-[family-name:var(--font-inter)]">
+            <p className="text-[rgba(240,253,244,0.85)] text-sm sm:text-base md:text-lg leading-relaxed mb-4 sm:mb-6 font-[family-name:var(--font-inter)]">
               Syntax Squad is a close-knit crew of programmers pushing each other through 24-hour hackathons, daily DSA sprints, and building real-world software.
             </p>
 
-            <div className="flex flex-wrap gap-2.5">
-              <span className="px-3.5 py-1.5 rounded-full bg-[#05150e]/70 border border-[rgba(34,197,94,0.3)] text-xs text-[#f0fdf4] font-medium font-[family-name:var(--font-space-grotesk)] shadow-sm backdrop-blur-sm">
+            <div className="flex flex-wrap gap-2 sm:gap-2.5">
+              <span className="px-3 sm:px-3.5 py-1 sm:py-1.5 rounded-full bg-[#05150e]/75 border border-[rgba(34,197,94,0.3)] text-[11px] sm:text-xs text-[#f0fdf4] font-medium font-[family-name:var(--font-space-grotesk)] shadow-sm backdrop-blur-sm">
                 🏆 36hr National Hackathons
               </span>
-              <span className="px-3.5 py-1.5 rounded-full bg-[#05150e]/70 border border-[rgba(34,197,94,0.3)] text-xs text-[#f0fdf4] font-medium font-[family-name:var(--font-space-grotesk)] shadow-sm backdrop-blur-sm">
+              <span className="px-3 sm:px-3.5 py-1 sm:py-1.5 rounded-full bg-[#05150e]/75 border border-[rgba(34,197,94,0.3)] text-[11px] sm:text-xs text-[#f0fdf4] font-medium font-[family-name:var(--font-space-grotesk)] shadow-sm backdrop-blur-sm">
                 🎤 Stage Talks & Tech Fests
               </span>
-              <span className="px-3.5 py-1.5 rounded-full bg-[#05150e]/70 border border-[rgba(34,197,94,0.3)] text-xs text-[#f0fdf4] font-medium font-[family-name:var(--font-space-grotesk)] shadow-sm backdrop-blur-sm">
+              <span className="px-3 sm:px-3.5 py-1 sm:py-1.5 rounded-full bg-[#05150e]/75 border border-[rgba(34,197,94,0.3)] text-[11px] sm:text-xs text-[#f0fdf4] font-medium font-[family-name:var(--font-space-grotesk)] shadow-sm backdrop-blur-sm">
                 ⚡ Real-world Projects
               </span>
             </div>
