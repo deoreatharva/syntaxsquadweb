@@ -3,6 +3,7 @@
 import { useState, useRef } from "react";
 import { Mail, ExternalLink, Trophy, Code2, Cpu, Users, Zap, BookOpen, ChevronDown, Terminal, ArrowRight, Check } from "lucide-react";
 import GlyphPortal from "@/components/ui/glyph-portal";
+import ClubShowcase from "@/components/ClubShowcase";
 
 /* ─── CUSTOM SOCIAL ICONS ───────────────────────────────── */
 
@@ -538,17 +539,42 @@ export default function Home() {
         }
         front={<HeroFront />}
       >
-        {/* This content shows after scrolling through the portal */}
-        <div style={{ fontFamily: "'Space Grotesk', sans-serif" }}>
-          <p style={{ color: "#22c55e", fontSize: 12, fontWeight: 600, letterSpacing: "0.1em", textTransform: "uppercase", marginBottom: 16, fontFamily: "'Inter', sans-serif" }}>
-            Terminal Online
-          </p>
-          <h2 style={{ color: "#f0fdf4", fontSize: "clamp(2rem, 5vw, 3.5rem)", fontWeight: 700, lineHeight: 1.1, letterSpacing: "-0.03em", maxWidth: "14ch", margin: "0 0 20px" }}>
-            We build, break, and win together.
-          </h2>
-          <p style={{ color: "rgba(240,253,244,0.7)", fontSize: 17, lineHeight: 1.7, maxWidth: "42ch", margin: 0, fontFamily: "'Inter', sans-serif" }}>
-            Syntax Squad is a close-knit crew of programmers pushing each other through 24-hour hackathons, daily DSA sprints, and building real-world software.
-          </p>
+        {/* Responsive Two-Column Layout: Left Story + Right Achievements Showcase */}
+        <div className="w-full max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+          {/* Left Column (Club Story & Highlights) */}
+          <div className="lg:col-span-5 flex flex-col justify-center" style={{ fontFamily: "'Space Grotesk', sans-serif" }}>
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#05150e]/70 border border-[rgba(34,197,94,0.35)] w-fit mb-4 backdrop-blur-md shadow-sm">
+              <span className="w-2 h-2 rounded-full bg-[#22c55e] animate-ping" />
+              <p className="text-[#22c55e] text-xs font-semibold tracking-widest uppercase m-0 font-[family-name:var(--font-inter)]">
+                Terminal Online
+              </p>
+            </div>
+
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold leading-[1.1] tracking-tight text-[#f0fdf4] mb-4">
+              We build, break, and win together.
+            </h2>
+
+            <p className="text-[rgba(240,253,244,0.85)] text-base sm:text-lg leading-relaxed mb-6 font-[family-name:var(--font-inter)]">
+              Syntax Squad is a close-knit crew of programmers pushing each other through 24-hour hackathons, daily DSA sprints, and building real-world software.
+            </p>
+
+            <div className="flex flex-wrap gap-2.5">
+              <span className="px-3.5 py-1.5 rounded-full bg-[#05150e]/70 border border-[rgba(34,197,94,0.3)] text-xs text-[#f0fdf4] font-medium font-[family-name:var(--font-space-grotesk)] shadow-sm backdrop-blur-sm">
+                🏆 36hr National Hackathons
+              </span>
+              <span className="px-3.5 py-1.5 rounded-full bg-[#05150e]/70 border border-[rgba(34,197,94,0.3)] text-xs text-[#f0fdf4] font-medium font-[family-name:var(--font-space-grotesk)] shadow-sm backdrop-blur-sm">
+                🎤 Stage Talks & Tech Fests
+              </span>
+              <span className="px-3.5 py-1.5 rounded-full bg-[#05150e]/70 border border-[rgba(34,197,94,0.3)] text-xs text-[#f0fdf4] font-medium font-[family-name:var(--font-space-grotesk)] shadow-sm backdrop-blur-sm">
+                ⚡ Real-world Projects
+              </span>
+            </div>
+          </div>
+
+          {/* Right Column (Achievements & Event Showcase) */}
+          <div className="lg:col-span-7 w-full flex justify-center items-center">
+            <ClubShowcase />
+          </div>
         </div>
       </GlyphPortal>
 
