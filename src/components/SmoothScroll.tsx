@@ -27,6 +27,16 @@ export default function SmoothScroll({ children }: { children: React.ReactNode }
 
     (window as any).__lenis = lenis;
 
+    // Synchronize GlyphPortal scroll animation with Lenis RAF tick.
+    // Without this, the portal listens to native "scroll" events which fire
+    // one RAF frame after Lenis moves the DOM — causing the word clip-path to lag.
+    // By dispatching a sync scroll event from inside Lenis's own tick we ensure
+    // the portal reads getBoundingClientRect() at the exact same time as Lenis's
+    // visual update, eliminating the trail/desync.
+    lenis.on("scroll", () => {
+      window.dispatchEvent(new Event("scroll", { bubbles: false, cancelable: false }));
+    });
+
     // Smooth scrolling for anchor links (e.g., #gp-...-content, #about, etc.)
     const handleAnchorClick = (e: MouseEvent) => {
       const anchor = (e.target as HTMLElement).closest("a");

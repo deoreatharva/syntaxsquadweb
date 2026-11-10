@@ -314,7 +314,12 @@ export default function GlyphPortal({
     };
     const schedule = () => { if (!raf && active) raf = requestAnimationFrame(frame); };
     const resize = () => { cancelAnimationFrame(raf); dirty = true; frame(); };
-    const scroll = () => schedule();
+    // Paint immediately on scroll instead of scheduling a RAF.
+    // With Lenis, scroll events fire *inside* Lenis's RAF tick (via the lenis.on("scroll")
+    // bridge in SmoothScroll.tsx). Calling paint() synchronously here means the clip-path
+    // update and getBoundingClientRect() happen in the same frame as Lenis's DOM transform,
+    // eliminating the 1-frame lag that caused letters to "trail" during scroll.
+    const scroll = () => { if (ready) paint(position()); else schedule(); };
     const choose = (event: Event) => {
       if (!choosing || position() >= .04) return;
       const button = (event.target as Element).closest<HTMLButtonElement>("[data-gp-letter]");
