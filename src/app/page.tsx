@@ -256,7 +256,7 @@ function WhatWeDoSection() {
           {activities.map((item, i) => (
             <div
               key={i}
-              className="group rounded-xl border border-[rgba(34,197,94,0.12)] bg-[#050f08] p-5 sm:p-6 hover:border-[rgba(34,197,94,0.35)] hover:bg-[#0b1f10] transition-all duration-300"
+              className="group rounded-xl border border-[rgba(34,197,94,0.12)] bg-[#050f08] p-5 sm:p-6 hover:border-[rgba(34,197,94,0.35)] hover:bg-[#0b1f10] transition-colors duration-300"
             >
               <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-lg bg-[rgba(34,197,94,0.1)] flex items-center justify-center text-[#22c55e] mb-3.5 sm:mb-4 group-hover:bg-[rgba(34,197,94,0.18)] transition-colors">
                 {item.icon}
@@ -294,7 +294,7 @@ function AchievementsSection() {
           {achievements.map((a, i) => (
             <div
               key={i}
-              className={`rounded-xl border p-4 sm:p-5 transition-all duration-200 flex flex-col justify-between ${
+              className={`rounded-xl border p-4 sm:p-5 transition duration-200 flex flex-col justify-between ${
                 a.isUpcoming
                   ? "border-dashed border-[rgba(34,197,94,0.3)] bg-[rgba(10,26,14,0.5)] hover:border-[rgba(34,197,94,0.5)]"
                   : "border-[rgba(34,197,94,0.12)] bg-[#0a1a0e] hover:border-[rgba(34,197,94,0.3)] hover:shadow-[0_8px_24px_rgba(34,197,94,0.08)]"
