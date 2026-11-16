@@ -145,7 +145,7 @@ export default function ClubShowcase() {
                 src={m.src}
                 alt={m.title}
                 className="w-full h-full object-cover object-center filter brightness-[0.92] contrast-[1.05]"
-                loading="eager"
+                loading={index === 0 ? "eager" : "lazy"}
               />
 
               {/* Cinematic Vignette & Bottom Gradient for readability */}

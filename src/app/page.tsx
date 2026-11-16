@@ -276,7 +276,6 @@ function WhatWeDoSection() {
 }
 
 /* ─── ACHIEVEMENTS SECTION ──────────────────────────────── */
-
 function AchievementsSection() {
   return (
     <section className="bg-[#050f08] py-16 sm:py-24 px-5 sm:px-8 md:px-12 lg:px-24">
@@ -294,11 +293,10 @@ function AchievementsSection() {
           {achievements.map((a, i) => (
             <div
               key={i}
-              className={`rounded-xl border p-4 sm:p-5 transition duration-200 flex flex-col justify-between ${
-                a.isUpcoming
+              className={`rounded-xl border p-4 sm:p-5 transition duration-200 flex flex-col justify-between ${a.isUpcoming
                   ? "border-dashed border-[rgba(34,197,94,0.3)] bg-[rgba(10,26,14,0.5)] hover:border-[rgba(34,197,94,0.5)]"
                   : "border-[rgba(34,197,94,0.12)] bg-[#0a1a0e] hover:border-[rgba(34,197,94,0.3)] hover:shadow-[0_8px_24px_rgba(34,197,94,0.08)]"
-              }`}
+                }`}
             >
               <div>
                 <div className="flex items-start justify-between mb-3">
