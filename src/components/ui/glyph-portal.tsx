@@ -263,10 +263,11 @@ export default function GlyphPortal({
       section.dataset.gpChoosing = String(choosing);
       field.style.clipPath = t >= 1 ? "none" : `url(#${clipId})`;
       section.style.setProperty("--gp-caption", String(1 - smooth(0.01, 0.16, p)));
-      section.style.setProperty("--gp-reveal", String(isStatic ? 1 : smooth(0.6, 0.88, p)));
+      section.style.setProperty("--gp-reveal", String(isStatic ? 1 : smooth(0.65, 0.90, p)));
+      section.style.setProperty("--gp-entered-events", isStatic || p >= 0.88 ? "auto" : "none");
       section.style.setProperty("--gp-field-scale", String(1 + .16 * smooth(0, .82, p)));
       section.style.setProperty("--gp-caption-hit", p < 0.08 ? "auto" : "none");
-      section.dataset.gpEntered = String(p >= 0.9);
+      section.dataset.gpEntered = String(p >= 0.88);
       section.dataset.gpProgress = p.toFixed(5);
       if (p !== lastProgress) { lastProgress = p; progressRef.current?.(p); }
     };
@@ -279,7 +280,7 @@ export default function GlyphPortal({
       const viewportHeight = Math.max(1, Math.min(root?.clientHeight ?? smallViewport, smallViewport));
       H = motion.matches ? Math.min(viewportHeight * 0.75, 480) : viewportHeight;
       section.style.setProperty("--gp-height", `${H}px`);
-      travel = H * length;
+      travel = H * Math.max(0.6, length - 1);
       art.setAttribute("viewBox", `0 0 ${W} ${H}`);
       if (fontDirty) { ready = readInk(); fontDirty = false; }
       if (!ready) return;
@@ -381,9 +382,9 @@ export default function GlyphPortal({
     <section ref={sectionRef} id={uid} className={className} aria-label={text}
       style={{ "--gp-length": length, "--gp-characters": Array.from(text).length, ...style } as CSSProperties}>
       <style>{`
-        ${q}{--gp-paper:#050f08;--gp-ink:#22c55e;--gp-field:#0b3b2a;--gp-foreground:#f0fdf4;position:relative;isolation:isolate;background:var(--gp-field);color:var(--gp-ink);font-family:"Space Grotesk",Arial,sans-serif;}
+        ${q}{--gp-paper:#050f08;--gp-ink:#22c55e;--gp-field:#0b3b2a;--gp-foreground:#f0fdf4;position:relative;isolation:isolate;background:var(--gp-field);color:var(--gp-ink);font-family:"Space Grotesk",Arial,sans-serif;height:calc(var(--gp-length,2.0)*var(--gp-height,100svh));}
         ${q}>[data-gp-viewport]{position:absolute;inset:0 auto auto 0;height:100vh;height:100svh;width:0;pointer-events:none;visibility:hidden;}
-        ${q} [data-gp-pin]{position:relative;height:var(--gp-height,100svh);overflow:clip;isolation:isolate;container-type:size;}
+        ${q} [data-gp-pin]{position:sticky;top:0;height:var(--gp-height,100svh);overflow:clip;isolation:isolate;container-type:size;}
         ${q} [data-gp-field]{position:absolute;inset:0;background:var(--gp-field);opacity:1;pointer-events:none;}
         ${q} [data-gp-art]{position:absolute;inset:0;width:100%;height:100%;overflow:visible;pointer-events:none;}
         ${q} [data-gp-marks]{fill:none;stroke:#22c55e;opacity:.6;}
@@ -393,8 +394,8 @@ export default function GlyphPortal({
         ${q} [data-gp-letter]:disabled{pointer-events:none;}
         ${q} [data-gp-letter]:focus-visible{outline:2px solid #22c55e;outline-offset:5px;}
         ${q} [data-gp-touch-picker]{display:none!important;visibility:hidden!important;pointer-events:none!important;}
-        ${q} [data-gp-caption]{position:absolute;inset:auto 8% 9%;display:flex;align-items:center;justify-content:space-between;gap:1rem;font:13px/1.4 "Space Grotesk",Arial,sans-serif;opacity:var(--gp-caption,1);pointer-events:var(--gp-caption-hit,auto);}
-        ${q} [data-gp-front]{position:absolute;inset:0;opacity:var(--gp-caption,1);pointer-events:none;}
+        ${q} [data-gp-caption]{position:absolute;inset:auto 8% 9%;display:flex;align-items:center;justify-content:space-between;gap:1rem;font:13px/1.4 "Space Grotesk",Arial,sans-serif;opacity:var(--gp-caption,1);pointer-events:var(--gp-caption-hit,auto);z-index:20;}
+        ${q} [data-gp-front]{position:absolute;inset:0;opacity:var(--gp-caption,1);pointer-events:none;z-index:15;}
         ${q} [data-gp-front] a,${q} [data-gp-front] button{pointer-events:var(--gp-caption-hit,auto);}
         ${q} [data-gp-front]:focus-within{opacity:1;}
         ${q} [data-gp-hint]{max-width:30ch;color:rgba(240,253,244,.75);letter-spacing:0.04em;}
@@ -402,21 +403,16 @@ export default function GlyphPortal({
         ${q} [data-gp-enter]:hover{background:#134e38;border-color:#22c55e;box-shadow:0 0 25px rgba(34,197,94,0.3);}
         ${q} [data-gp-enter]:focus-visible{outline:2px solid #22c55e;outline-offset:4px;}
         ${q} [data-gp-caption]:focus-within{opacity:1;pointer-events:auto;}
-        ${q} [data-gp-content]{box-sizing:border-box;position:relative;min-height:var(--gp-height,100svh);padding:clamp(32px,7%,100px);display:grid;align-content:center;color:var(--gp-foreground);background:var(--gp-field);overflow-wrap:anywhere;}
-        ${q}[data-gp-motion=on] [data-gp-pin]{position:sticky;top:0;}
+        ${q} [data-gp-content]{box-sizing:border-box;position:absolute;inset:0;padding:clamp(20px,4vw,48px);display:flex;align-items:center;justify-content:center;color:var(--gp-foreground);background:transparent;opacity:var(--gp-reveal,0);pointer-events:var(--gp-entered-events,none);overflow-y:auto;z-index:30;transition:opacity 0.3s ease-out;}
+        ${q}[data-gp-entered=true] [data-gp-content]{pointer-events:auto;}
         ${q}[data-gp-motion=off] [data-gp-hint]{display:none;}
-        ${q}[data-gp-motion=on] [data-gp-content]{margin-top:calc((var(--gp-length) - 1) * var(--gp-height));background:#0b3b2a;opacity:var(--gp-reveal,1);pointer-events:none;}
-        ${q}[data-gp-motion=on][data-gp-entered=true] [data-gp-content]{pointer-events:auto;}
-        ${q}[data-gp-motion=on]:has([data-gp-content]:focus-within) [data-gp-field]{clip-path:none!important;}
-        ${q}[data-gp-motion=on] [data-gp-content]:focus-within{opacity:1;pointer-events:auto;}
-        ${q}:has([data-gp-content]:focus-within) [data-gp-caption],${q}:has([data-gp-content]:focus-within) [data-gp-marks]{opacity:0;}
         @media(max-width:768px){
-          ${q} [data-gp-content]{min-height:auto!important;padding:48px 18px!important;background:#0b3b2a!important;}
+          ${q} [data-gp-content]{padding:24px 14px!important;}
           ${q} [data-gp-caption]{inset:auto 16px 20px;flex-direction:column;gap:8px;text-align:center;}
           ${q} [data-gp-hint]{font-size:11px;max-width:100%;}
           ${q} [data-gp-enter]{min-height:38px;padding:0 14px;font-size:12px;}
         }
-        @media(prefers-reduced-motion:reduce){${q} [data-gp-pin]{position:relative!important;} ${q} [data-gp-content]{margin-top:0!important;opacity:1!important;background:var(--gp-field)!important;min-height:0;padding-block:64px;} ${q} [data-gp-caption]{opacity:1!important;}}
+        @media(prefers-reduced-motion:reduce){${q}{height:auto!important;} ${q} [data-gp-pin]{position:relative!important;} ${q} [data-gp-content]{position:relative!important;opacity:1!important;min-height:0;padding-block:64px;} ${q} [data-gp-caption]{opacity:1!important;}}
         @media(prefers-reduced-motion:reduce){${q} [data-gp-hint]{display:none;}}
       `}</style>
       <div data-gp-viewport aria-hidden="true" />
@@ -495,9 +491,9 @@ export default function GlyphPortal({
           <span data-gp-hint aria-hidden="true">{interactive ? "Scroll down to step inside." : annotations ? "A passage through type" : ""}</span>
           <a data-gp-enter href={`#${uid}-content`}>{enterLabel}<span aria-hidden="true">↘</span></a>
         </div>
-      </div>
-      <div data-gp-content id={`${uid}-content`} tabIndex={-1}>
-        {children ?? <div><h2>Where code meets community.</h2><p>Syntax Squad — building the next generation of developers.</p></div>}
+        <div data-gp-content id={`${uid}-content`} tabIndex={-1}>
+          {children ?? <div><h2>Where code meets community.</h2><p>Syntax Squad — building the next generation of developers.</p></div>}
+        </div>
       </div>
     </section>
   );
