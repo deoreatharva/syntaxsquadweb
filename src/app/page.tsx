@@ -568,7 +568,7 @@ export default function Home() {
     <main>
       <GlyphPortal
         word="SYNTAX"
-        scrollLength={2.0}
+        scrollLength={1.4}
         interactive={true}
         fontWeight={900}
         enterLabel="Step inside"
