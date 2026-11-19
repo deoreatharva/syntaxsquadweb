@@ -168,12 +168,9 @@ html.lenis, html.lenis body {
   pointer-events: none;
 }
 
-/* Custom Fluid Cursor: hide native arrow on desktop, keep text cursor on inputs */
+/* Custom Fluid Cursor: completely hide native OS cursor on desktop so custom cursor replaces it */
 @media (hover: hover) and (pointer: fine) {
-  body, a, button, [role="button"] {
-    cursor: none;
-  }
-  input, textarea, select {
-    cursor: text;
+  html, body, *, *::before, *::after {
+    cursor: none !important;
   }
 }
