@@ -124,7 +124,8 @@ export default function ClubShowcase() {
     >
       {/* ── Main Showcase Frame ── */}
       <div
-        className="relative w-full aspect-[16/10] sm:aspect-[16/9] md:aspect-[16/10] rounded-xl sm:rounded-2xl overflow-hidden border border-[rgba(255,255,255,0.18)] bg-[#051a11] shadow-[0_12px_36px_rgba(0,0,0,0.45)] group"
+        data-cursor="slide ↔"
+        className="relative w-full aspect-[16/10] sm:aspect-[16/9] md:aspect-[16/10] rounded-xl sm:rounded-2xl overflow-hidden border border-[rgba(255,255,255,0.18)] bg-[#051a11] shadow-[0_12px_36px_rgba(0,0,0,0.45)] group cursor-grab active:cursor-grabbing"
         onTouchStart={handleTouchStart}
         onTouchEnd={handleTouchEnd}
       >

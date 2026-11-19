@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import { Space_Grotesk, Inter } from "next/font/google";
 import "./globals.css";
 import SmoothScroll from "@/components/SmoothScroll";
+import FluidCursor from "@/components/FluidCursor";
 
 const spaceGrotesk = Space_Grotesk({
   subsets: ["latin"],
@@ -55,6 +56,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en" className={`h-full ${spaceGrotesk.variable} ${inter.variable}`}>
       <body className="min-h-full flex flex-col antialiased bg-[#050f08] text-[#f0fdf4]">
+        <FluidCursor />
         <SmoothScroll>
           {children}
         </SmoothScroll>
