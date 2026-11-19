@@ -134,7 +134,7 @@ export default function ClubShowcase() {
           return (
             <div
               key={m.id}
-              className={`absolute inset-0 transition-all duration-700 ease-out transform ${
+              className={`absolute inset-0 transition-[opacity,transform] duration-700 ease-out transform ${
                 isActive
                   ? "opacity-100 scale-100 pointer-events-auto"
                   : "opacity-0 scale-[1.03] pointer-events-none"
@@ -186,14 +186,14 @@ export default function ClubShowcase() {
             <button
               onClick={prevSlide}
               aria-label="Previous photo"
-              className="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-[#05150e]/80 hover:bg-[#22c55e] text-[#f0fdf4] hover:text-[#05150e] border border-white/15 hover:border-[#22c55e] flex items-center justify-center backdrop-blur-md transition-all duration-200 active:scale-95 cursor-pointer shadow-md"
+              className="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-[#05150e]/80 hover:bg-[#22c55e] text-[#f0fdf4] hover:text-[#05150e] border border-white/15 hover:border-[#22c55e] flex items-center justify-center backdrop-blur-md transition-colors duration-200 active:scale-95 cursor-pointer shadow-md"
             >
               <ChevronLeft className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
             </button>
             <button
               onClick={nextSlide}
               aria-label="Next photo"
-              className="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-[#05150e]/80 hover:bg-[#22c55e] text-[#f0fdf4] hover:text-[#05150e] border border-white/15 hover:border-[#22c55e] flex items-center justify-center backdrop-blur-md transition-all duration-200 active:scale-95 cursor-pointer shadow-md"
+              className="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-[#05150e]/80 hover:bg-[#22c55e] text-[#f0fdf4] hover:text-[#05150e] border border-white/15 hover:border-[#22c55e] flex items-center justify-center backdrop-blur-md transition-colors duration-200 active:scale-95 cursor-pointer shadow-md"
             >
               <ChevronRight className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
             </button>
@@ -209,7 +209,7 @@ export default function ClubShowcase() {
             <button
               key={m.id}
               onClick={() => setActiveIndex(index)}
-              className={`relative flex-shrink-0 w-12 sm:w-16 h-8 sm:h-11 rounded-md sm:rounded-lg overflow-hidden border transition-all duration-300 cursor-pointer ${
+              className={`relative flex-shrink-0 w-12 sm:w-16 h-8 sm:h-11 rounded-md sm:rounded-lg overflow-hidden border transition-[opacity,border-color,box-shadow,transform] duration-300 cursor-pointer ${
                 isActive
                   ? "border-[#22c55e] ring-2 ring-[#22c55e]/40 scale-105 opacity-100 shadow-[0_0_12px_rgba(34,197,94,0.4)]"
                   : "border-white/15 opacity-55 hover:opacity-90 hover:border-white/40"
