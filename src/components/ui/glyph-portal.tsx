@@ -236,7 +236,7 @@ export default function GlyphPortal({
     const paint = (progress: number) => {
       const isStatic = motion.matches || !target;
       const p = isStatic ? 0 : progress;
-      const t = clamp(p / 0.78);
+      const t = clamp(p / 0.48);
       const eased = t < 0.5 ? 4 * t ** 3 : 1 - (-2 * t + 2) ** 3 / 2;
       const scale = Math.exp(Math.log(startScale) + Math.log(endScale / startScale) * eased);
       const blend = endScale === startScale ? 0 : (1 / scale - 1 / startScale) / (1 / endScale - 1 / startScale);
@@ -253,7 +253,7 @@ export default function GlyphPortal({
 
       if (visibleText) {
         visibleText.setAttribute("transform", transform);
-        visibleText.style.opacity = String(1 - smooth(0.5, 0.82, p));
+        visibleText.style.opacity = String(1 - smooth(0.15, 0.42, p));
       }
 
       marks.setAttribute("transform", transform);
@@ -263,10 +263,10 @@ export default function GlyphPortal({
       section.dataset.gpChoosing = String(choosing);
       field.style.clipPath = t >= 1 ? "none" : `url(#${clipId})`;
       section.style.setProperty("--gp-caption", String(1 - smooth(0.01, 0.16, p)));
-      section.style.setProperty("--gp-reveal", String(isStatic ? 1 : smooth(0.6, 0.88, p)));
+      section.style.setProperty("--gp-reveal", String(isStatic ? 1 : smooth(0.48, 0.70, p)));
       section.style.setProperty("--gp-field-scale", String(1 + .16 * smooth(0, .82, p)));
       section.style.setProperty("--gp-caption-hit", p < 0.08 ? "auto" : "none");
-      section.dataset.gpEntered = String(p >= 0.9);
+      section.dataset.gpEntered = String(p >= 0.65);
       section.dataset.gpProgress = p.toFixed(5);
       if (p !== lastProgress) { lastProgress = p; progressRef.current?.(p); }
     };
@@ -405,7 +405,7 @@ export default function GlyphPortal({
         ${q} [data-gp-content]{box-sizing:border-box;position:relative;min-height:var(--gp-height,100svh);padding:clamp(32px,7%,100px);display:grid;align-content:center;color:var(--gp-foreground);background:var(--gp-field);overflow-wrap:anywhere;}
         ${q}[data-gp-motion=on] [data-gp-pin]{position:sticky;top:0;}
         ${q}[data-gp-motion=off] [data-gp-hint]{display:none;}
-        ${q}[data-gp-motion=on] [data-gp-content]{margin-top:calc((var(--gp-length) - 1) * var(--gp-height));background:#0b3b2a;opacity:var(--gp-reveal,1);pointer-events:none;}
+        ${q}[data-gp-motion=on] [data-gp-content]{margin-top:calc((var(--gp-length) - 1) * var(--gp-height));background:#0b3b2a;opacity:var(--gp-reveal,0);pointer-events:none;}
         ${q}[data-gp-motion=on][data-gp-entered=true] [data-gp-content]{pointer-events:auto;}
         ${q}[data-gp-motion=on]:has([data-gp-content]:focus-within) [data-gp-field]{clip-path:none!important;}
         ${q}[data-gp-motion=on] [data-gp-content]:focus-within{opacity:1;pointer-events:auto;}
