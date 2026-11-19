@@ -4,7 +4,6 @@ import { useEffect, useRef, useState } from "react";
 
 export default function FluidCursor() {
   const [mounted, setMounted] = useState(false);
-  const [cursorText, setCursorText] = useState<string | null>(null);
   const [isHovering, setIsHovering] = useState(false);
   const [isClicking, setIsClicking] = useState(false);
   const [isTextInput, setIsTextInput] = useState(false);
@@ -36,24 +35,16 @@ export default function FluidCursor() {
       if (!target) return;
 
       const inputEl = target.closest("input, textarea");
-      const customCursorEl = target.closest("[data-cursor]") as HTMLElement | null;
       const interactiveEl = target.closest("a, button, [role='button'], select, [data-gp-letter], [data-gp-enter]");
 
       if (inputEl) {
         setIsTextInput(true);
         setIsHovering(false);
-        setCursorText(null);
-      } else if (customCursorEl) {
-        setIsTextInput(false);
-        setCursorText(customCursorEl.dataset.cursor || null);
-        setIsHovering(true);
       } else if (interactiveEl) {
         setIsTextInput(false);
-        setCursorText(null);
         setIsHovering(true);
       } else {
         setIsTextInput(false);
-        setCursorText(null);
         setIsHovering(false);
       }
     };
@@ -77,15 +68,15 @@ export default function FluidCursor() {
         pointerRef.current.style.transform = `translate3d(${mousePos.current.x}px, ${mousePos.current.y}px, 0)`;
       }
 
-      // 2. Smooth buttery lerp for trailing magnetic ring (lag factor 0.16)
-      ringPos.current.x += (mousePos.current.x - ringPos.current.x) * 0.16;
-      ringPos.current.y += (mousePos.current.y - ringPos.current.y) * 0.16;
+      // 2. Smooth buttery lerp for trailing magnetic ring
+      ringPos.current.x += (mousePos.current.x - ringPos.current.x) * 0.18;
+      ringPos.current.y += (mousePos.current.y - ringPos.current.y) * 0.18;
 
       if (ringRef.current) {
         ringRef.current.style.transform = `translate3d(${ringPos.current.x}px, ${ringPos.current.y}px, 0) translate(-50%, -50%)`;
       }
 
-      // 3. Slower ambient lantern glow lerp (lag factor 0.08)
+      // 3. Slower ambient lantern glow lerp
       glowPos.current.x += (mousePos.current.x - glowPos.current.x) * 0.08;
       glowPos.current.y += (mousePos.current.y - glowPos.current.y) * 0.08;
 
@@ -120,30 +111,22 @@ export default function FluidCursor() {
       {/* 1. Large Ambient Lantern Glow */}
       <div
         ref={glowRef}
-        className="fixed top-0 left-0 w-[260px] h-[260px] rounded-full bg-[radial-gradient(circle,rgba(34,197,94,0.12)_0%,rgba(34,197,94,0.02)_55%,transparent_75%)] blur-2xl will-change-transform"
+        className="fixed top-0 left-0 w-[240px] h-[240px] rounded-full bg-[radial-gradient(circle,rgba(34,197,94,0.1)_0%,rgba(34,197,94,0.02)_55%,transparent_75%)] blur-2xl will-change-transform"
       />
 
       {/* 2. Magnetic Trailing Glass Aura Ring (Centers on pointer with translate(-50%,-50%)) */}
       <div
         ref={ringRef}
-        className={`fixed top-0 left-0 rounded-full border border-[#22c55e]/60 transition-[width,height,background-color,border-color,box-shadow,opacity] duration-200 ease-out flex items-center justify-center will-change-transform ${
+        className={`fixed top-0 left-0 rounded-full border transition-[width,height,background-color,border-color,box-shadow,transform] duration-200 ease-out will-change-transform ${
           isTextInput
-            ? "w-6 h-6 border-[#22c55e]/40 bg-transparent opacity-60"
+            ? "w-6 h-6 border-[#22c55e]/30 bg-transparent opacity-40"
             : isClicking
-            ? "w-8 h-8 bg-[#22c55e]/30 border-[#22c55e] scale-90"
-            : cursorText
-            ? "w-24 h-24 bg-[#05150e]/90 border-[#22c55e] shadow-[0_0_30px_rgba(34,197,94,0.45)] backdrop-blur-md"
+            ? "w-7 h-7 bg-[#22c55e]/30 border-[#22c55e] scale-90"
             : isHovering
-            ? "w-14 h-14 bg-[#22c55e]/15 border-[#22c55e] shadow-[0_0_24px_rgba(34,197,94,0.35)] backdrop-blur-[2px]"
-            : "w-9 h-9 bg-[#22c55e]/5 border-[#22c55e]/40 shadow-[0_0_12px_rgba(34,197,94,0.15)]"
+            ? "w-11 h-11 bg-[#22c55e]/15 border-[#22c55e] shadow-[0_0_20px_rgba(34,197,94,0.35)] backdrop-blur-[2px]"
+            : "w-8 h-8 bg-[#22c55e]/5 border-[#22c55e]/35 shadow-[0_0_10px_rgba(34,197,94,0.12)]"
         }`}
-      >
-        {cursorText && (
-          <span className="text-[10px] font-bold tracking-widest text-[#22c55e] uppercase font-[family-name:var(--font-space-grotesk)] animate-pulse">
-            {cursorText}
-          </span>
-        )}
-      </div>
+      />
 
       {/* 3. Primary Replacement Pointer (Precision Tip anchored at 0,0) */}
       <div
@@ -153,14 +136,13 @@ export default function FluidCursor() {
         {isTextInput ? (
           /* Sleek Emerald I-Beam for Text Inputs */
           <div className="w-[2px] h-5 bg-[#22c55e] shadow-[0_0_8px_#22c55e] -translate-x-[1px] -translate-y-2.5 animate-pulse rounded-full" />
-        ) : cursorText ? null : isHovering ? (
-          /* Glowing Emerald Reticle Dot on Interactive Elements */
-          <div className="w-2.5 h-2.5 rounded-full bg-[#22c55e] shadow-[0_0_12px_#22c55e] -translate-x-1/2 -translate-y-1/2" />
         ) : (
           /* Custom Cyber Emerald Arrow Pointer */
           <div className="-translate-x-[2px] -translate-y-[2px]">
             <svg
-              className="w-5 h-5 drop-shadow-[0_0_8px_rgba(34,197,94,0.85)] filter"
+              className={`w-5 h-5 drop-shadow-[0_0_8px_rgba(34,197,94,0.85)] filter transition-transform duration-150 ${
+                isClicking ? "scale-90" : isHovering ? "scale-105" : "scale-100"
+              }`}
               viewBox="0 0 24 24"
               fill="none"
               xmlns="http://www.w3.org/2000/svg"
